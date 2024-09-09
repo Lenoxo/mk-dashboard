@@ -6,7 +6,7 @@ import "./styles.css";
 function App() {
   return (
     <>
-      <header>MK-Dashboard</header>
+      {/* <header>MK-Dashboard</header> */}
       <TopBar />
       <main>
         <FightResult />
