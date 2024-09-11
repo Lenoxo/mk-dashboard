@@ -1,0 +1,24 @@
+.add-fight {
+  position: sticky;
+  bottom: 0;
+  width: 100vw;
+  height: auto;
+  display: grid;
+  padding-bottom: 0.5rem;
+}
+
+.add-fight__button {
+  justify-self: center;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  border: none;
+}
+
+.add-fight__button:active {
+  background-color: darkred;
+}
