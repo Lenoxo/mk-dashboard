@@ -1,0 +1,39 @@
+.fight-result {
+  width: 100vw;
+  height: 35vh;
+  margin-bottom: 1rem;
+  /*background-color: brown;*/
+  position: relative;
+}
+
+.fight-result__character-1-image,
+.fight-result__character-2-image {
+  width: 30%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+}
+
+.fight-result__character-1-image {
+  right: 70%;
+}
+
+.fight-result__character-2-image {
+  right: 0;
+}
+
+.fight-banner {
+  width: 90%;
+  height: 25%;
+  border: 0.5rem solid #5b99c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
