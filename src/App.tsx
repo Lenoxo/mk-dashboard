@@ -35,22 +35,22 @@ function App() {
       {
         date: currentDate,
         rival: "Rival 1",
-        character1: "Scorpion",
-        character2: "Subzero",
+        character2: "Scorpion",
+        character1: "Subzero",
         win: true,
       },
       {
         date: currentDate,
         rival: "Rival 1",
-        character1: "Scorpion",
-        character2: "Subzero",
+        character2: "Scorpion",
+        character1: "Subzero",
         win: false,
       },
       {
         date: currentDate,
         rival: "Rival 1",
-        character1: "Scorpion",
-        character2: "Subzero",
+        character2: "Scorpion",
+        character1: "Subzero",
         win: true,
       },
     ],
@@ -88,9 +88,22 @@ function App() {
         defeatCounter={defeatCounter}
       />
       <main>
-        <FightResult />
-        <FightResult />
-        <FightResult />
+        {profileData.history.map((fight) => {
+          const character1Data = charactersData.find(
+            (character) => character.name === fight.character1,
+          );
+          const character2Data = charactersData.find(
+            (character) => character.name === fight.character2,
+          );
+
+          return (
+            <FightResult
+              fightData={fight}
+              character1Image={character1Data?.imageUrl}
+              character2Image={character2Data?.imageUrl}
+            />
+          );
+        })}
       </main>
       <AddFightButton />
     </>
