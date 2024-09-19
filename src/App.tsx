@@ -6,7 +6,20 @@ import "./styles.css";
 
 const now = new Date();
 const currentDate = now.toLocaleDateString();
-// const formatDate = { year: "numeric", month: "numeric", day: "numeric" };
+
+function countVictoriesAndDefeats(history: []) {
+  let victories: number = 0;
+  let defeats: number = 0;
+  console.info(history);
+  history.forEach((fight) => {
+    if (fight.win) {
+      victories++;
+    } else {
+      defeats++;
+    }
+  });
+  return { victories, defeats };
+}
 
 function App() {
   const [profileData, setProfileData] = useState({
@@ -26,6 +39,20 @@ function App() {
         character2: "Subzero",
         win: true,
       },
+      {
+        date: currentDate,
+        rival: "Rival 1",
+        character1: "Scorpion",
+        character2: "Subzero",
+        win: false,
+      },
+      {
+        date: currentDate,
+        rival: "Rival 1",
+        character1: "Scorpion",
+        character2: "Subzero",
+        win: true,
+      },
     ],
   });
 
@@ -35,18 +62,20 @@ function App() {
   ]);
 
   const [currentDayFights, setCurrentDayFights] = useState([]);
+  const [victoryCounter, setVictoryCounter] = useState(0);
+  const [defeatCounter, setDefeatCounter] = useState(0);
 
   useEffect(() => {
     if (profileData.history.length > 0) {
       setCurrentDayFights(profileData.history);
-      // setTimeout(() => {
-      //   console.table(currentDayFights);
-      // }, 1000);
-      console.table(profileData.history);
+      const { victories, defeats } = countVictoriesAndDefeats(
+        profileData.history,
+      );
+      setDefeatCounter(defeats);
+      setVictoryCounter(victories);
     }
   }, []);
 
-  console.info(profileData);
   return (
     <>
       {/* <header>MK-Dashboard</header> */}
@@ -55,6 +84,8 @@ function App() {
         playerImage={profileData.image}
         rivalName={profileData.rivals[0].nickname}
         rivalImage={profileData.rivals[0].image}
+        victoryCounter={victoryCounter}
+        defeatCounter={defeatCounter}
       />
       <main>
         <FightResult />
