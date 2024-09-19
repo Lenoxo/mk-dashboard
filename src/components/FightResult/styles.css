@@ -37,3 +37,7 @@
   border-radius: 1rem;
   font-size: 1.5rem;
 }
+
+.fight-banner--defeat {
+  border-color: red;
+}
