@@ -10,7 +10,6 @@ const currentDate = now.toLocaleDateString();
 function countVictoriesAndDefeats(history: []) {
   let victories: number = 0;
   let defeats: number = 0;
-  console.info(history);
   history.forEach((fight) => {
     if (fight.win) {
       victories++;
@@ -88,7 +87,7 @@ function App() {
         defeatCounter={defeatCounter}
       />
       <main>
-        {profileData.history.map((fight) => {
+        {profileData.history.map((fight, index) => {
           const character1Data = charactersData.find(
             (character) => character.name === fight.character1,
           );
@@ -98,6 +97,7 @@ function App() {
 
           return (
             <FightResult
+              key={index}
               fightData={fight}
               character1Image={character1Data?.imageUrl}
               character2Image={character2Data?.imageUrl}
