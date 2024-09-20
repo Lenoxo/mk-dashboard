@@ -1,5 +1,14 @@
 import "./styles.css";
 
+interface Props {
+  playerName: string;
+  playerImage: string;
+  rivalName: string;
+  rivalImage: string;
+  victoryCounter: number;
+  defeatCounter: number;
+}
+
 export function TopBar({
   playerName,
   playerImage,
@@ -7,7 +16,7 @@ export function TopBar({
   rivalImage,
   victoryCounter,
   defeatCounter,
-}) {
+}: Props) {
   return (
     <nav className="topbar">
       <div className="player-thumbnail">

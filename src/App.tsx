@@ -4,10 +4,12 @@ import { FightResult } from "./components/FightResult";
 import { TopBar } from "./components/Topbar";
 import "./styles.css";
 
+import { HistoryEntry, ProfileData, CharacterData } from "./types";
+
 const now = new Date();
 const currentDate = now.toLocaleDateString();
 
-function countVictoriesAndDefeats(history: []) {
+function countVictoriesAndDefeats(history: HistoryEntry[]) {
   let victories: number = 0;
   let defeats: number = 0;
   history.forEach((fight) => {
@@ -21,7 +23,7 @@ function countVictoriesAndDefeats(history: []) {
 }
 
 function App() {
-  const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState<ProfileData>({
     nickname: "Lenoxo",
     image: "https://avatarfiles.alphacoders.com/359/thumb-1920-359966.jpg",
     rivals: [
@@ -55,14 +57,14 @@ function App() {
     ],
   });
 
-  const [charactersData, setCharactersData] = useState([
+  const [charactersData, setCharactersData] = useState<CharacterData[]>([
     { name: "Scorpion", imageUrl: "/scorpion.png" },
     { name: "Subzero", imageUrl: "/subzero.png" },
   ]);
 
-  const [currentDayFights, setCurrentDayFights] = useState([]);
-  const [victoryCounter, setVictoryCounter] = useState(0);
-  const [defeatCounter, setDefeatCounter] = useState(0);
+  const [currentDayFights, setCurrentDayFights] = useState<HistoryEntry[]>([]);
+  const [victoryCounter, setVictoryCounter] = useState<number>(0);
+  const [defeatCounter, setDefeatCounter] = useState<number>(0);
 
   useEffect(() => {
     if (profileData.history.length > 0) {
@@ -73,7 +75,7 @@ function App() {
       setDefeatCounter(defeats);
       setVictoryCounter(victories);
     }
-  }, []);
+  }, [profileData]);
 
   return (
     <>
@@ -87,7 +89,7 @@ function App() {
         defeatCounter={defeatCounter}
       />
       <main>
-        {profileData.history.map((fight, index) => {
+        {currentDayFights?.map((fight: HistoryEntry, index) => {
           const character1Data = charactersData.find(
             (character) => character.name === fight.character1,
           );
@@ -95,12 +97,26 @@ function App() {
             (character) => character.name === fight.character2,
           );
 
+          if (!character1Data) {
+            throw new Error(
+              "The character name in history does not exists in charactersData " +
+                character1Data,
+            );
+          }
+
+          if (!character2Data) {
+            throw new Error(
+              "The character name in history does not exists in charactersData " +
+                character2Data,
+            );
+          }
+
           return (
             <FightResult
               key={index}
               fightData={fight}
-              character1Image={character1Data?.imageUrl}
-              character2Image={character2Data?.imageUrl}
+              character1Image={character1Data.imageUrl}
+              character2Image={character2Data.imageUrl}
             />
           );
         })}

@@ -1,6 +1,17 @@
+import { HistoryEntry } from "../../types";
 import "./styles.css";
 
-export function FightResult({ fightData, character1Image, character2Image }) {
+interface Props {
+  fightData: HistoryEntry;
+  character1Image: string;
+  character2Image: string;
+}
+
+export function FightResult({
+  fightData,
+  character1Image,
+  character2Image,
+}: Props) {
   const { character1, character2, win } = fightData;
   return (
     <article className="fight-result">
