@@ -7,17 +7,17 @@
   justify-content: center;
 }
 
-.player-thumbnail {
+.playerThumbnail {
   max-width: 20vw;
 }
 
-.player-thumbnail__nickname {
+.playerThumbnail__nickname {
   font-size: 1rem;
   font-style: italic;
   font-weight: bold;
 }
 
-.player-thumbnail__picture {
+.playerThumbnail__picture {
   max-width: 4rem;
   border-radius: 50%;
 }
@@ -27,13 +27,13 @@
   font-size: 4rem;
 }
 
-.topbar__result-counter-1 {
+.topbar__resultCounter1 {
   color: #5b99c2;
   margin-left: 1rem;
   font-size: 4rem;
 }
 
-.topbar__result-counter-2 {
+.topbar__resultCounter2 {
   color: red;
   margin-right: 1rem;
   font-size: 4rem;

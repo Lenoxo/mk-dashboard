@@ -1,4 +1,4 @@
-.fight-result {
+.fightResult {
   width: 100vw;
   height: 35vh;
   margin-bottom: 1rem;
@@ -6,8 +6,8 @@
   position: relative;
 }
 
-.fight-result__character-1-image,
-.fight-result__character-2-image {
+.fightResult__character1Image,
+.fightResult__character2Image {
   width: 30%;
   height: 100%;
   object-fit: contain;
@@ -15,15 +15,15 @@
   top: 0;
 }
 
-.fight-result__character-1-image {
+.fightResult__character1Image {
   right: 70%;
 }
 
-.fight-result__character-2-image {
+.fightResult__character2Image {
   right: 0;
 }
 
-.fight-banner {
+.fightBanner {
   width: 90%;
   height: 25%;
   border: 0.5rem solid #5b99c2;
@@ -38,6 +38,6 @@
   font-size: 1.5rem;
 }
 
-.fight-banner--defeat {
+.fightBanner--defeat {
   border-color: red;
 }
