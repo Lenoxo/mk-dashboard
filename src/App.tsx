@@ -5,6 +5,8 @@ import { TopBar } from "./components/Topbar";
 import "./styles.css";
 
 import { HistoryEntry, ProfileData, CharacterData } from "./types";
+import { Modal } from "./components/Modal";
+import { NewFightForm } from "./components/NewFightForm";
 
 const now = new Date();
 const currentDate = now.toLocaleDateString();
@@ -65,6 +67,7 @@ function App() {
   const [currentDayFights, setCurrentDayFights] = useState<HistoryEntry[]>([]);
   const [victoryCounter, setVictoryCounter] = useState<number>(0);
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (profileData.history.length > 0) {
@@ -121,7 +124,12 @@ function App() {
           );
         })}
       </main>
-      <AddFightButton />
+      <AddFightButton setOpenModal={setOpenModal} />
+      {openModal && (
+        <Modal>
+          <NewFightForm setOpenModal={setOpenModal} />
+        </Modal>
+      )}
     </>
   );
 }

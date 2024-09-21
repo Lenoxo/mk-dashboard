@@ -1,0 +1,10 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  left: 0;
+  background-color: rgba(32, 35, 41, 0.8);
+}
