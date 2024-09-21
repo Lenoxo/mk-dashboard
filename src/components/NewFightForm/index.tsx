@@ -1,26 +1,46 @@
 import { useRef } from "react";
 import { currentDate } from "../../utils/currentDate";
+import { ProfileData } from "../../types";
 
-export function NewFightForm({ setOpenModal }) {
-  const rivalRef = useRef(null);
-  const character1Ref = useRef(null);
-  const character2Ref = useRef(null);
-  const winRef = useRef(null);
+interface Props {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
+  profileData: ProfileData;
+}
 
-  function handleSubmit(event) {
+export function NewFightForm({
+  setOpenModal,
+  profileData,
+  setProfileData,
+}: Props) {
+  const rivalRef = useRef<HTMLInputElement>(null);
+  const character1Ref = useRef<HTMLInputElement>(null);
+  const character2Ref = useRef<HTMLInputElement>(null);
+  const winRef = useRef<HTMLInputElement>(null);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // TODO: Añadir validación de datos escritos en el form / cambiar el tipo de input a Select.
 
     const newFight = {
       date: currentDate,
-      rival: rivalRef.current.value,
-      character2: character2Ref.current.value,
-      character1: character1Ref.current.value,
-      win: winRef.current.checked ? true : false,
+      rival: rivalRef.current?.value || "",
+      character2: character2Ref.current?.value || "",
+      character1: character1Ref.current?.value || "",
+      win: winRef.current?.checked ? true : false,
     };
-    console.info(newFight);
-    console.log("Form saved");
+
+    const updatedHistory = [...profileData.history];
+    updatedHistory.push(newFight);
+
+    setProfileData({
+      ...profileData,
+      history: updatedHistory,
+    });
     setOpenModal(false);
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <label>Choose your rival</label>

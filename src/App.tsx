@@ -89,42 +89,49 @@ function App() {
         defeatCounter={defeatCounter}
       />
       <main>
-        {currentDayFights?.map((fight: HistoryEntry, index) => {
-          const character1Data = charactersData.find(
-            (character) => character.name === fight.character1,
-          );
-          const character2Data = charactersData.find(
-            (character) => character.name === fight.character2,
-          );
-
-          if (!character1Data) {
-            throw new Error(
-              "The character name in history does not exists in charactersData " +
-                character1Data,
+        {currentDayFights
+          ?.map((fight: HistoryEntry, index) => {
+            const character1Data = charactersData.find(
+              (character) => character.name === fight.character1,
             );
-          }
-
-          if (!character2Data) {
-            throw new Error(
-              "The character name in history does not exists in charactersData " +
-                character2Data,
+            const character2Data = charactersData.find(
+              (character) => character.name === fight.character2,
             );
-          }
 
-          return (
-            <FightResult
-              key={index}
-              fightData={fight}
-              character1Image={character1Data.imageUrl}
-              character2Image={character2Data.imageUrl}
-            />
-          );
-        })}
+            if (!character1Data) {
+              throw new Error(
+                "The character name in history does not exists in charactersData " +
+                  character1Data,
+              );
+            }
+
+            if (!character2Data) {
+              throw new Error(
+                "The character name in history does not exists in charactersData " +
+                  character2Data,
+              );
+            }
+
+            return (
+              <FightResult
+                key={index}
+                fightData={fight}
+                character1Image={character1Data.imageUrl}
+                character2Image={character2Data.imageUrl}
+              />
+            );
+          })
+          .reverse()}
       </main>
+
       <AddFightButton setOpenModal={setOpenModal} />
       {openModal && (
         <Modal>
-          <NewFightForm setOpenModal={setOpenModal} />
+          <NewFightForm
+            setOpenModal={setOpenModal}
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
         </Modal>
       )}
     </>
