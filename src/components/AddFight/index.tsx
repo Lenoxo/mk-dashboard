@@ -1,12 +1,12 @@
 import "./styles.css";
 
-export function AddFightButton() {
-  function addFight() {
-    console.info("Button for addFight pressed");
+export function AddFightButton({ setOpenModal }) {
+  function handleClick() {
+    setOpenModal(true);
   }
   return (
     <div className="addFight">
-      <button onClick={addFight} className="addFight__button">
+      <button onClick={handleClick} className="addFight__button">
         +
       </button>
     </div>
