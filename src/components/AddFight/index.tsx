@@ -5,8 +5,8 @@ export function AddFightButton() {
     console.info("Button for addFight pressed");
   }
   return (
-    <div className="add-fight">
-      <button onClick={addFight} className="add-fight__button">
+    <div className="addFight">
+      <button onClick={addFight} className="addFight__button">
         +
       </button>
     </div>

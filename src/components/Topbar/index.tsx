@@ -19,16 +19,16 @@ export function TopBar({
 }: Props) {
   return (
     <nav className="topbar">
-      <div className="player-thumbnail">
-        <p className="player-thumbnail__nickname">{playerName}</p>
-        <img className="player-thumbnail__picture" src={playerImage} />
+      <div className="playerThumbnail">
+        <p className="playerThumbnail__nickname">{playerName}</p>
+        <img className="playerThumbnail__picture" src={playerImage} />
       </div>
-      <span className="topbar__result-counter-1">{victoryCounter}</span>
+      <span className="topbar__resultCounter1">{victoryCounter}</span>
       <p className="topbar__vs-text">VS</p>
-      <span className="topbar__result-counter-2">{defeatCounter}</span>
-      <div className="player-thumbnail">
-        <p className="player-thumbnail__nickname">{rivalName}</p>
-        <img className="player-thumbnail__picture" src={rivalImage} />
+      <span className="topbar__resultCounter2">{defeatCounter}</span>
+      <div className="playerThumbnail">
+        <p className="playerThumbnail__nickname">{rivalName}</p>
+        <img className="playerThumbnail__picture" src={rivalImage} />
       </div>
     </nav>
   );
