@@ -1,5 +1,5 @@
-.add-fight {
-  position: sticky;
+.addFight {
+  position: absolute;
   bottom: 0;
   width: 100vw;
   height: auto;
@@ -7,7 +7,7 @@
   padding-bottom: 0.5rem;
 }
 
-.add-fight__button {
+.addFight__button {
   justify-self: center;
   text-align: center;
   width: 60px;
@@ -19,6 +19,6 @@
   border: none;
 }
 
-.add-fight__button:active {
+.addFight__button:active {
   background-color: darkred;
 }
