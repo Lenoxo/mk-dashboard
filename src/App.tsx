@@ -3,13 +3,10 @@ import { AddFightButton } from "./components/AddFight";
 import { FightResult } from "./components/FightResult";
 import { TopBar } from "./components/Topbar";
 import "./styles.css";
-
+import { currentDate } from "./utils/currentDate";
 import { HistoryEntry, ProfileData, CharacterData } from "./types";
 import { Modal } from "./components/Modal";
 import { NewFightForm } from "./components/NewFightForm";
-
-const now = new Date();
-const currentDate = now.toLocaleDateString();
 
 function countVictoriesAndDefeats(history: HistoryEntry[]) {
   let victories: number = 0;
