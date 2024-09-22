@@ -130,6 +130,7 @@ function App() {
           <NewFightForm
             setOpenModal={setOpenModal}
             profileData={profileData}
+            charactersData={charactersData}
             setProfileData={setProfileData}
           />
         </Modal>
