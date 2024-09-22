@@ -57,9 +57,13 @@ export function NewFightForm({
         name="rivalOptions"
         ref={rivalRef}
       >
-        {rivalsList.map((rival) => {
+        {rivalsList.map((rival, index) => {
           return (
-            <option className="form__select__option" value={rival.nickname}>
+            <option
+              key={index}
+              className="form__select__option"
+              value={rival.nickname}
+            >
               {rival.nickname}
             </option>
           );
@@ -75,9 +79,13 @@ export function NewFightForm({
         name="character1Options"
         ref={character1Ref}
       >
-        {charactersData.map((character1) => {
+        {charactersData.map((character1, index) => {
           return (
-            <option className="form__select__option" value={character1.name}>
+            <option
+              key={index}
+              className="form__select__option"
+              value={character1.name}
+            >
               {character1.name}
             </option>
           );
@@ -93,9 +101,13 @@ export function NewFightForm({
         name="character2Options"
         ref={character2Ref}
       >
-        {charactersData.map((character2) => {
+        {charactersData.map((character2, index) => {
           return (
-            <option className="form__select__option" value={character2.name}>
+            <option
+              key={index}
+              className="form__select__option"
+              value={character2.name}
+            >
               {character2.name}
             </option>
           );
