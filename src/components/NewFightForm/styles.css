@@ -1,0 +1,35 @@
+.form {
+  width: 85vw;
+  height: 55vh;
+  background-color: #191919;
+  color: white;
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+  border-radius: 1rem;
+  padding: 1rem 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__select,
+.form__button {
+  background-color: #2f2f2f;
+  width: 45%;
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid aliceblue;
+  font-weight: bolder;
+}
+
+.form__checkbox {
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor; /* use currentColor for color inheritance */
+  border-radius: 0.15em;
+}

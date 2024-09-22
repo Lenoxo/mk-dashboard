@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { currentDate } from "../../utils/currentDate";
 import { ProfileData, CharacterData } from "../../types";
+import "./styles.css";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,8 +26,6 @@ export function NewFightForm({
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // TODO: Añadir validación de datos escritos en el form / cambiar el tipo de input a Select.
-
     const newFight = {
       date: currentDate,
       rival: rivalRef.current?.value || "",
@@ -48,41 +47,76 @@ export function NewFightForm({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Choose your rival</label>
-      {/* <input ref={rivalRef} type="text" /> */}
-      <select id="rivalSelect" name="rivalOptions" ref={rivalRef}>
+    <form className="form" onSubmit={handleSubmit}>
+      <label className="form__label" htmlFor="rivalSelect">
+        Choose your rival
+      </label>
+      <select
+        className="form__select"
+        id="rivalSelect"
+        name="rivalOptions"
+        ref={rivalRef}
+      >
         {rivalsList.map((rival) => {
-          return <option value={rival.nickname}>{rival.nickname}</option>;
+          return (
+            <option className="form__select__option" value={rival.nickname}>
+              {rival.nickname}
+            </option>
+          );
         })}
       </select>
 
-      <label>Choose your character</label>
+      <label className="form__label" htmlFor="character1Select">
+        Choose your character
+      </label>
       <select
+        className="form__select"
         id="character1Select"
         name="character1Options"
         ref={character1Ref}
       >
         {charactersData.map((character1) => {
-          return <option value={character1.name}>{character1.name}</option>;
+          return (
+            <option className="form__select__option" value={character1.name}>
+              {character1.name}
+            </option>
+          );
         })}
       </select>
 
-      <label>Choose your rival's character</label>
+      <label className="form__label" htmlFor="character2Select">
+        Choose your rival's character
+      </label>
       <select
+        className="form__select"
         id="character2Select"
         name="character2Options"
         ref={character2Ref}
       >
         {charactersData.map((character2) => {
-          return <option value={character2.name}>{character2.name}</option>;
+          return (
+            <option className="form__select__option" value={character2.name}>
+              {character2.name}
+            </option>
+          );
         })}
       </select>
 
-      <label>Did you win?</label>
-      <input ref={winRef} type="checkbox" name="win" />
+      {/* This is an implicit label, I read about them in MDN docs */}
 
-      <button type="submit">Save</button>
+      <label className="form__label">
+        Did you win?
+        <input
+          className="form__checkbox"
+          ref={winRef}
+          type="checkbox"
+          name="win"
+        />
+      </label>
+
+      <button className="form__button" type="submit">
+        Save
+      </button>
     </form>
   );
 }
