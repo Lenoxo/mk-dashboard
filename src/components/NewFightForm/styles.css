@@ -27,6 +27,11 @@
   font-weight: bolder;
 }
 
+.form__button--cancel {
+  background-color: #311111;
+  border-color: #803131;
+}
+
 .form__checkbox {
   width: 1.15em;
   height: 1.15em;

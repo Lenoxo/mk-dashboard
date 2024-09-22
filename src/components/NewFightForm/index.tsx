@@ -126,8 +126,18 @@ export function NewFightForm({
         />
       </label>
 
-      <button className="form__button" type="submit">
+      <button className="form__button form__button--submit" type="submit">
         Save
+      </button>
+
+      <button
+        className="form__button form__button--cancel"
+        type="button"
+        onClick={() => {
+          setOpenModal(false);
+        }}
+      >
+        Cancel
       </button>
     </form>
   );
