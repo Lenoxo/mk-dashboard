@@ -1,22 +1,26 @@
 import { useRef } from "react";
 import { currentDate } from "../../utils/currentDate";
-import { ProfileData } from "../../types";
+import { ProfileData, CharacterData } from "../../types";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
   profileData: ProfileData;
+  charactersData: CharacterData[];
 }
 
 export function NewFightForm({
   setOpenModal,
   profileData,
+  charactersData,
   setProfileData,
 }: Props) {
-  const rivalRef = useRef<HTMLInputElement>(null);
-  const character1Ref = useRef<HTMLInputElement>(null);
-  const character2Ref = useRef<HTMLInputElement>(null);
+  const rivalRef = useRef<HTMLSelectElement>(null);
+  const character1Ref = useRef<HTMLSelectElement>(null);
+  const character2Ref = useRef<HTMLSelectElement>(null);
   const winRef = useRef<HTMLInputElement>(null);
+
+  const rivalsList = profileData.rivals;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,19 +42,42 @@ export function NewFightForm({
       ...profileData,
       history: updatedHistory,
     });
+
+    console.info(newFight);
     setOpenModal(false);
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>Choose your rival</label>
-      <input ref={rivalRef} type="text" />
+      {/* <input ref={rivalRef} type="text" /> */}
+      <select id="rivalSelect" name="rivalOptions" ref={rivalRef}>
+        {rivalsList.map((rival) => {
+          return <option value={rival.nickname}>{rival.nickname}</option>;
+        })}
+      </select>
 
       <label>Choose your character</label>
-      <input ref={character1Ref} type="text" />
+      <select
+        id="character1Select"
+        name="character1Options"
+        ref={character1Ref}
+      >
+        {charactersData.map((character1) => {
+          return <option value={character1.name}>{character1.name}</option>;
+        })}
+      </select>
 
       <label>Choose your rival's character</label>
-      <input ref={character2Ref} type="text" />
+      <select
+        id="character2Select"
+        name="character2Options"
+        ref={character2Ref}
+      >
+        {charactersData.map((character2) => {
+          return <option value={character2.name}>{character2.name}</option>;
+        })}
+      </select>
 
       <label>Did you win?</label>
       <input ref={winRef} type="checkbox" name="win" />
