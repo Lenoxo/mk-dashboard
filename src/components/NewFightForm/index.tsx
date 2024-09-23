@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { currentDate } from "../../utils/currentDate";
-import { ProfileData, CharacterData } from "../../types";
+import { ProfileData, CharacterData, HistoryEntry } from "../../types";
 import "./styles.css";
 
 interface Props {
@@ -23,14 +23,37 @@ export function NewFightForm({
 
   const rivalsList = profileData.rivals;
 
+  const [selectedCharacter1, setSelectedCharacter1] = useState<CharacterData>();
+  const [selectedCharacter2, setSelectedCharacter2] = useState<CharacterData>();
+
+  function handleSelectCharacter1() {
+    if (!character1Ref.current) {
+      throw new Error("character1Ref.current is undefined");
+    }
+
+    // I make a rest here because I left the first option in the select as "Choose an option"
+    const characterIndex = character1Ref.current.selectedIndex - 1;
+    setSelectedCharacter1(charactersData[characterIndex]);
+  }
+
+  function handleSelectCharacter2() {
+    if (!character2Ref.current) {
+      throw new Error("character2Ref.current is undefined");
+    }
+
+    // I make a rest here because I left the first option in the select as "Choose an option"
+    const characterIndex = character2Ref.current.selectedIndex - 1;
+    setSelectedCharacter2(charactersData[characterIndex]);
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const newFight = {
+    const newFight: HistoryEntry = {
       date: currentDate,
       rival: rivalRef.current?.value || "",
-      character2: character2Ref.current?.value || "",
-      character1: character1Ref.current?.value || "",
+      character2: selectedCharacter2?.name || "",
+      character1: selectedCharacter1?.name || "",
       win: winRef.current?.checked ? true : false,
     };
 
@@ -42,7 +65,6 @@ export function NewFightForm({
       history: updatedHistory,
     });
 
-    console.info(newFight);
     setOpenModal(false);
   }
 
@@ -77,8 +99,13 @@ export function NewFightForm({
         className="form__select"
         id="character1Select"
         name="character1Options"
+        onChange={handleSelectCharacter1}
         ref={character1Ref}
       >
+        <option className="form__select__option" value="">
+          -- Choose an option --
+        </option>
+
         {charactersData.map((character1, index) => {
           return (
             <option
@@ -91,6 +118,10 @@ export function NewFightForm({
           );
         })}
       </select>
+      <img
+        className="form__character1Image"
+        src={selectedCharacter1?.imageUrl}
+      />
 
       <label className="form__label" htmlFor="character2Select">
         Choose your rival's character
@@ -99,8 +130,13 @@ export function NewFightForm({
         className="form__select"
         id="character2Select"
         name="character2Options"
+        onChange={handleSelectCharacter2}
         ref={character2Ref}
       >
+        <option className="form__select__option" value="">
+          -- Choose an option --
+        </option>
+
         {charactersData.map((character2, index) => {
           return (
             <option
@@ -113,6 +149,10 @@ export function NewFightForm({
           );
         })}
       </select>
+      <img
+        className="form__character2Image"
+        src={selectedCharacter2?.imageUrl}
+      />
 
       {/* This is an implicit label, I read about them in MDN docs */}
 
