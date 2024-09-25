@@ -1,12 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  RouterProvider,
-  useRoutes,
-} from "react-router-dom";
+import { BrowserRouter, useRoutes } from "react-router-dom";
 import { ProfilePage } from "./pages/profile.tsx";
 import { AsideNav } from "./components/AsideNav/index.tsx";
 
