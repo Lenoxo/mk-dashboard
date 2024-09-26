@@ -1,0 +1,27 @@
+.quickInfo {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #2f2f2f;
+  height: 18vh;
+}
+
+.quickInfo__image {
+  max-width: 5.5rem;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.quickInfo__nickname {
+  font-size: 1.6rem;
+  font-weight: bold;
+  overflow-x: scroll;
+  max-width: 35vw;
+}
+
+.quickInfo__edit {
+  max-width: 2rem;
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 1rem;
+}

@@ -1,3 +1,10 @@
+import { QuickInfo } from "../components/QuickInfo";
+
 export function ProfilePage() {
-  return <div>Hello world from /profile</div>;
+  return (
+    <div>
+      <QuickInfo />
+      Hello world from /profile
+    </div>
+  );
 }
