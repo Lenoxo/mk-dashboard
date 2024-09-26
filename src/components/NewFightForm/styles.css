@@ -36,6 +36,10 @@
   object-fit: cover;
 }
 
+.form__character2Image {
+  transform: scaleX(-1);
+}
+
 .form__button--cancel {
   background-color: #311111;
   border-color: #803131;

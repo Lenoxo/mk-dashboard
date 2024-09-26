@@ -20,6 +20,7 @@
 }
 
 .fightResult__character2Image {
+  transform: scaleX(-1);
   right: 0;
 }
 
