@@ -57,8 +57,8 @@ function App() {
   });
 
   const [charactersData, setCharactersData] = useState<CharacterData[]>([
-    { name: "Scorpion", imageUrl: "/scorpion.png" },
-    { name: "Subzero", imageUrl: "/subzero.png" },
+    { name: "Scorpion", imageUrl: "https://imgur.com/609Ay70.png" },
+    { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
   ]);
 
   const [currentDayFights, setCurrentDayFights] = useState<HistoryEntry[]>([]);
