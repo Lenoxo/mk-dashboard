@@ -9,12 +9,12 @@ export function QuickInfo() {
       />
       <p className="quickInfo__nickname">Test Text</p>
       <svg
+        className="quickInfo__edit"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        className="quickInfo__edit"
       >
         <path
           stroke-linecap="round"
