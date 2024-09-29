@@ -12,8 +12,12 @@ interface Props {
 }
 
 export function NewFightForm({ setOpenModal }: Props) {
-  const { setProfileData, profileData, charactersData } =
-    useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+
+  const { setProfileData, profileData, charactersData } = context;
 
   const rivalRef = useRef<HTMLSelectElement>(null);
   const character1Ref = useRef<HTMLSelectElement>(null);

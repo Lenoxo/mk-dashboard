@@ -3,7 +3,12 @@ import "./styles.css";
 import { AppContext } from "../../context";
 
 export function QuickInfo() {
-  const { profileData } = useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+  const { profileData } = context;
+
   return (
     <header className="quickInfo">
       <img src={profileData.image} className="quickInfo__image" />

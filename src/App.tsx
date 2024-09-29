@@ -9,13 +9,18 @@ import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
 
 function App() {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+
   const {
     profileData,
     charactersData,
     victoryCounter,
     defeatCounter,
     currentDayFights,
-  } = useContext(AppContext);
+  } = context;
   const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>

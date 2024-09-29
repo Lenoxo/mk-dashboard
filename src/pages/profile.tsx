@@ -6,7 +6,12 @@ import "./styles.css";
 import { AppContext } from "../context";
 
 export function ProfilePage() {
-  const { profileData } = useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+  const { profileData } = context;
+
   return (
     <>
       <QuickInfo />

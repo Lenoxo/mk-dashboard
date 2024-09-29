@@ -1,9 +1,21 @@
+import { createContext } from "react";
 import { ReactNode, useEffect, useState } from "react";
 import { ProfileData, CharacterData, HistoryEntry } from "../types";
 import { currentDate, countVictoriesAndDefeats } from "../utils";
-import { AppContext } from ".";
 
-export function AppProvider({ children }: { children: ReactNode }) {
+interface AppContextType {
+  profileData: ProfileData;
+  setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
+  charactersData: CharacterData[];
+  setCharactersData: React.Dispatch<React.SetStateAction<CharacterData[]>>;
+  victoryCounter: number;
+  defeatCounter: number;
+  currentDayFights: HistoryEntry[];
+}
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+function AppProvider({ children }: { children: ReactNode }) {
   const [profileData, setProfileData] = useState<ProfileData>({
     nickname: "Lenoxo",
     image: "https://avatarfiles.alphacoders.com/359/thumb-1920-359966.jpg",
@@ -74,3 +86,5 @@ export function AppProvider({ children }: { children: ReactNode }) {
     </AppContext.Provider>
   );
 }
+
+export { AppContext, AppProvider };
