@@ -17,8 +17,14 @@ export function ProfilePage() {
       <QuickInfo />
       <AddRival />
       <section className="profile__rivalsList">
-        {profileData.rivals.map((rival) => {
-          return <RivalQuickInfo name={rival.nickname} image={rival.image} />;
+        {profileData.rivals.map((rival, index) => {
+          return (
+            <RivalQuickInfo
+              key={index}
+              name={rival.nickname}
+              image={rival.image}
+            />
+          );
         })}
       </section>
       Hello world from /profile
