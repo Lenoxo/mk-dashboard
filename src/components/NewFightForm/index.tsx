@@ -1,21 +1,24 @@
-import { useRef, useState } from "react";
-import { currentDate } from "../../utils/currentDate";
-import { ProfileData, CharacterData, HistoryEntry } from "../../types";
+import { useContext, useRef, useState } from "react";
+import { currentDate } from "../../utils";
+import { CharacterData, HistoryEntry } from "../../types";
 import "./styles.css";
+import { AppContext } from "../../context";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
-  profileData: ProfileData;
-  charactersData: CharacterData[];
+  // setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
+  // profileData: ProfileData;
+  // charactersData: CharacterData[];
 }
 
-export function NewFightForm({
-  setOpenModal,
-  profileData,
-  charactersData,
-  setProfileData,
-}: Props) {
+export function NewFightForm({ setOpenModal }: Props) {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+
+  const { setProfileData, profileData, charactersData } = context;
+
   const rivalRef = useRef<HTMLSelectElement>(null);
   const character1Ref = useRef<HTMLSelectElement>(null);
   const character2Ref = useRef<HTMLSelectElement>(null);

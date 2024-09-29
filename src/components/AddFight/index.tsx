@@ -1,6 +1,10 @@
 import "./styles.css";
 
-export function AddFightButton({ setOpenModal }) {
+interface Props {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function AddFightButton({ setOpenModal }: Props) {
   function handleClick() {
     setOpenModal(true);
   }
