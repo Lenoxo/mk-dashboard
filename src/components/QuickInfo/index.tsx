@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import "./styles.css";
+import { AppContext } from "../../context";
 
 export function QuickInfo() {
+  const { profileData } = useContext(AppContext);
   return (
     <header className="quickInfo">
-      <img
-        src="https://avatarfiles.alphacoders.com/359/thumb-1920-359966.jpg"
-        className="quickInfo__image"
-      />
-      <p className="quickInfo__nickname">Test Text</p>
+      <img src={profileData.image} className="quickInfo__image" />
+      <p className="quickInfo__nickname">{profileData.nickname}</p>
       <svg
         className="quickInfo__edit"
         xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,15 @@
 import "./styles.css";
 
-export function RivalQuickInfo() {
+interface Props {
+  name: string;
+  image: string;
+}
+
+export function RivalQuickInfo({ name, image }: Props) {
   return (
     <article className="rivalQuickInfo">
-      <img
-        className="rivalQuickInfo__image"
-        src="https://avatarfiles.alphacoders.com/362/thumb-1920-362804.jpg"
-      />
-      <p className="rivalQuickInfo__nickname">Rival 1 hardcoded</p>
+      <img className="rivalQuickInfo__image" src={image} />
+      <p className="rivalQuickInfo__nickname">{name}</p>
       <svg
         className="rivalQuickInfo__edit"
         xmlns="http://www.w3.org/2000/svg"
