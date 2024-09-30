@@ -1,0 +1,40 @@
+.form {
+  width: 85vw;
+  height: 85vh;
+  background-color: #191919;
+  color: white;
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+  border-radius: 1rem;
+  padding: 1rem 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__button {
+  background-color: #2f2f2f;
+  width: 45%;
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid whitesmoke;
+  font-weight: bolder;
+}
+
+.form__button--cancel {
+  background-color: #311111;
+  border-color: #803131;
+}
+/*.form__character2Image,*/
+/*.form__character1Image {*/
+/*  width: 9rem;*/
+/*  height: 9rem;*/
+/*  border-radius: 50%;*/
+/*  border: 1px solid whitesmoke;*/
+/*  object-fit: cover;*/
+/*}*/

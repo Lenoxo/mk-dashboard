@@ -13,7 +13,7 @@ export interface HistoryEntry {
   win: boolean;
 }
 
-interface Rival {
+export interface Rival {
   nickname: string;
   image: string;
 }
