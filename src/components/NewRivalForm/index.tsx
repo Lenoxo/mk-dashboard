@@ -66,12 +66,19 @@ export function NewRivalForm({ setOpenModal }: Props) {
       <label className="form__label" htmlFor="nicknameInput">
         Write your rival's nickname
       </label>
-      <input id="nicknameInput" type="text" ref={nicknameRef} required />
+      <input
+        className="form__input"
+        id="nicknameInput"
+        type="text"
+        ref={nicknameRef}
+        required
+      />
 
       <label className="form__label" htmlFor="imageInput">
         Paste your rival's picture link
       </label>
       <input
+        className="form__input"
         id="imageInput"
         type="url"
         ref={imageRef}

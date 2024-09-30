@@ -15,7 +15,8 @@
   font-weight: bold;
 }
 
-.form__button {
+.form__button,
+.form__input {
   background-color: #2f2f2f;
   width: 45%;
   text-align: center;

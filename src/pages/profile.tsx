@@ -35,7 +35,6 @@ export function ProfilePage() {
           );
         })}
       </section>
-      Hello world from /profile
     </>
   );
 }
