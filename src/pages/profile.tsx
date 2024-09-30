@@ -5,7 +5,7 @@ import { RivalQuickInfo } from "../components/RivalQuickInfo";
 import "./styles.css";
 import { AppContext } from "../context";
 import { Modal } from "../components/Modal";
-import { NewRivalForm } from "../components/NewRivalForm";
+import { RivalForm } from "../components/RivalForm";
 
 export function ProfilePage() {
   const context = useContext(AppContext);
@@ -21,7 +21,7 @@ export function ProfilePage() {
       <AddRival setOpenModal={setOpenModal} />
       {openModal && (
         <Modal>
-          <NewRivalForm setOpenModal={setOpenModal} />
+          <RivalForm setOpenModal={setOpenModal} />
         </Modal>
       )}
       <section className="profile__rivalsList">
@@ -29,6 +29,7 @@ export function ProfilePage() {
           return (
             <RivalQuickInfo
               key={index}
+              rivalIndex={index}
               name={rival.nickname}
               image={rival.image}
             />
