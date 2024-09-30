@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AddRival } from "../components/AddRival";
 import { QuickInfo } from "../components/QuickInfo";
 import { RivalQuickInfo } from "../components/RivalQuickInfo";
 import "./styles.css";
 import { AppContext } from "../context";
+import { Modal } from "../components/Modal";
+import { NewRivalForm } from "../components/NewRivalForm";
 
 export function ProfilePage() {
   const context = useContext(AppContext);
@@ -12,10 +14,16 @@ export function ProfilePage() {
   }
   const { profileData } = context;
 
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       <QuickInfo />
-      <AddRival />
+      <AddRival setOpenModal={setOpenModal} />
+      {openModal && (
+        <Modal>
+          <NewRivalForm setOpenModal={setOpenModal} />
+        </Modal>
+      )}
       <section className="profile__rivalsList">
         {profileData.rivals.map((rival, index) => {
           return (
@@ -27,7 +35,6 @@ export function ProfilePage() {
           );
         })}
       </section>
-      Hello world from /profile
     </>
   );
 }
