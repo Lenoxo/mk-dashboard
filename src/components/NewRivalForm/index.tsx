@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import "./styles.css";
 import { AppContext } from "../../context";
 import { Rival } from "../../types";
@@ -17,6 +17,18 @@ export function NewRivalForm({ setOpenModal }: Props) {
 
   const nicknameRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+
+  const [imageValue, setImageValue] = useState<string | null>(null);
+
+  function handleImageChange() {
+    if (imageRef.current === null) {
+      throw new Error(
+        "imageRef.current is null, check your usage for the component",
+      );
+    }
+
+    setImageValue(imageRef.current.value);
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,12 +66,26 @@ export function NewRivalForm({ setOpenModal }: Props) {
       <label className="form__label" htmlFor="nicknameInput">
         Write your rival's nickname
       </label>
-      <input id="nicknameInput" type="text" ref={nicknameRef} />
+      <input id="nicknameInput" type="text" ref={nicknameRef} required />
 
       <label className="form__label" htmlFor="imageInput">
-        Paste your rival's profile picture
+        Paste your rival's picture link
       </label>
-      <input id="imageInput" type="text" ref={imageRef} />
+      <input
+        id="imageInput"
+        type="url"
+        ref={imageRef}
+        required
+        onChange={handleImageChange}
+        placeholder="both .gif and .png work"
+      />
+
+      {imageValue && (
+        <div className="form__preview">
+          <p className="form__preview__text">Preview</p>
+          <img className="form__preview__rivalImage" src={imageValue} />
+        </div>
+      )}
 
       <button className="form__button form__button--submit" type="submit">
         Save

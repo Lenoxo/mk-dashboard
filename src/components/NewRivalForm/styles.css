@@ -30,11 +30,21 @@
   background-color: #311111;
   border-color: #803131;
 }
-/*.form__character2Image,*/
-/*.form__character1Image {*/
-/*  width: 9rem;*/
-/*  height: 9rem;*/
-/*  border-radius: 50%;*/
-/*  border: 1px solid whitesmoke;*/
-/*  object-fit: cover;*/
-/*}*/
+
+.form__preview {
+  display: grid;
+  place-items: center;
+}
+
+.form__preview__text {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.form__preview__rivalImage {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  border: 1px solid whitesmoke;
+  object-fit: cover;
+}
