@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "./styles.css";
 import { AppContext } from "../../context";
 import { Rival } from "../../types";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>> | null;
@@ -23,7 +23,7 @@ export function RivalForm({ setOpenModal }: Props) {
   const [rivalData, setRivalData] = useState<Rival | null>(null);
 
   const { id } = useParams();
-  const parsedId: number = parseInt(id);
+  const parsedId: number | null = id ? parseInt(id) : null;
 
   useEffect(() => {
     if (!id) {
@@ -37,6 +37,7 @@ export function RivalForm({ setOpenModal }: Props) {
 
       if (profileData.rivals[parsedId]) {
         setRivalData(profileData.rivals[parsedId]);
+        setImageValue(profileData.rivals[parsedId].image);
       }
     }
   }, [id, parsedId, profileData.rivals]);
@@ -50,25 +51,12 @@ export function RivalForm({ setOpenModal }: Props) {
 
     setImageValue(imageRef.current.value);
   }
-  function renderCancelButton() {
+
+  function handleCancel() {
     if (setOpenModal) {
-      return (
-        <button
-          className="form__button form__button--cancel"
-          type="button"
-          onClick={() => {
-            setOpenModal(false);
-          }}
-        >
-          Cancel
-        </button>
-      );
+      setOpenModal(false);
     } else {
-      return (
-        <Link className="form__button form__button--cancel" to="/profile">
-          Cancel
-        </Link>
-      );
+      navigate("/profile");
     }
   }
 
@@ -86,7 +74,10 @@ export function RivalForm({ setOpenModal }: Props) {
     }
   }
 
-  function updateRivalData(updatedRivalData: Rival, rivalId: number) {
+  function updateRivalData(updatedRivalData: Rival, rivalId: number | null) {
+    if (rivalId === null) {
+      throw new Error("You're giving me a rivalId that is null");
+    }
     const updatedRivals = [...profileData.rivals];
     updatedRivals[rivalId] = updatedRivalData;
 
@@ -152,18 +143,22 @@ export function RivalForm({ setOpenModal }: Props) {
         placeholder="both .gif and .png work"
       />
 
-      {imageValue && (
-        <div className="form__preview">
-          <p className="form__preview__text">Preview</p>
-          <img className="form__preview__rivalImage" src={imageValue} />
-        </div>
-      )}
+      <div className="form__preview">
+        <p className="form__preview__text">Preview</p>
+        <img className="form__preview__rivalImage" src={imageValue || ""} />
+      </div>
 
       <button className="form__button form__button--submit" type="submit">
         Save
       </button>
 
-      {renderCancelButton()}
+      <button
+        className="form__button form__button--cancel"
+        type="button"
+        onClick={handleCancel}
+      >
+        Cancel
+      </button>
     </form>
   );
 }
