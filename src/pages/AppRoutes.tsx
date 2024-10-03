@@ -1,8 +1,9 @@
-import App from "./App.tsx";
+import App from "../App";
 import { useRoutes } from "react-router-dom";
-import { ProfilePage } from "./pages/profile.tsx";
-import { RivalForm } from "./components/RivalForm/index.tsx";
-import { UpdateProfileForm } from "./components/UpdateProfileForm/index.tsx";
+import { ProfilePage } from "./profile";
+import { UpdateProfileForm } from "../components/UpdateProfileForm";
+import { RivalForm } from "../components/RivalForm";
+import { HistoryPage } from "./history";
 
 export function AppRoutes() {
   const routes = useRoutes([
@@ -23,6 +24,10 @@ export function AppRoutes() {
       path: "/profile/rivals/:id",
       // I left null because I'm not using this form inside a Modal
       element: <RivalForm setOpenModal={null} />,
+    },
+    {
+      path: "/history",
+      element: <HistoryPage />,
     },
   ]);
   return routes;

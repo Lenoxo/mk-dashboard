@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { AddRival } from "../components/AddRival";
-import { QuickInfo } from "../components/QuickInfo";
-import { RivalQuickInfo } from "../components/RivalQuickInfo";
+import { AppContext } from "../../context";
+import { QuickInfo } from "../../components/QuickInfo";
+import { AddRival } from "../../components/AddRival";
+import { Modal } from "../../components/Modal";
+import { RivalForm } from "../../components/RivalForm";
+import { RivalQuickInfo } from "../../components/RivalQuickInfo";
 import "./styles.css";
-import { AppContext } from "../context";
-import { Modal } from "../components/Modal";
-import { RivalForm } from "../components/RivalForm";
 
 export function ProfilePage() {
   const context = useContext(AppContext);
