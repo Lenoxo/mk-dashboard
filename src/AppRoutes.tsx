@@ -2,6 +2,7 @@ import App from "./App.tsx";
 import { useRoutes } from "react-router-dom";
 import { ProfilePage } from "./pages/profile.tsx";
 import { RivalForm } from "./components/RivalForm/index.tsx";
+import { UpdateProfileForm } from "./components/UpdateProfileForm/index.tsx";
 
 export function AppRoutes() {
   const routes = useRoutes([
@@ -13,6 +14,10 @@ export function AppRoutes() {
     {
       path: "/profile",
       element: <ProfilePage />,
+    },
+    {
+      path: "/profile/update",
+      element: <UpdateProfileForm />,
     },
     {
       path: "/profile/rivals/:id",
