@@ -11,9 +11,11 @@
 }
 
 .rivalQuickInfo__image {
-  max-width: 4.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border: 2px solid white;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .rivalQuickInfo__nickname {

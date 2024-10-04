@@ -7,9 +7,11 @@
 }
 
 .quickInfo__image {
-  max-width: 5.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
   border: 2px solid white;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .quickInfo__nickname {
