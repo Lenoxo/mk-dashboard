@@ -7,6 +7,7 @@ export function AsideNav() {
       Later on, this will be a working sidebar
       <br />
       <NavLink to="/profile">Profile</NavLink>
+      <NavLink to="/history">History</NavLink>
       <NavLink to="/">Home</NavLink>
     </aside>
   );

@@ -3,6 +3,7 @@ import "./styles.css";
 import { AppContext } from "../../context";
 import { Rival } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>> | null;
@@ -21,9 +22,9 @@ export function RivalForm({ setOpenModal }: Props) {
   const imageRef = useRef<HTMLInputElement>(null);
   const [imageValue, setImageValue] = useState<string | null>(null);
   const [rivalData, setRivalData] = useState<Rival | null>(null);
+  const [rivalIndex, setRivalIndex] = useState<number>(0);
 
   const { id } = useParams();
-  const parsedId: number | null = id ? parseInt(id) : null;
 
   useEffect(() => {
     if (!id) {
@@ -31,16 +32,28 @@ export function RivalForm({ setOpenModal }: Props) {
       // No in /profile/rivals/:id
       return;
     } else {
-      if (typeof parsedId !== "number") {
-        throw new Error("The current rival id does not exist");
+      if (typeof id !== "string") {
+        throw new Error("The current rival id in the url does not exist");
       }
 
-      if (profileData.rivals[parsedId]) {
-        setRivalData(profileData.rivals[parsedId]);
-        setImageValue(profileData.rivals[parsedId].image);
+      let tempIndex = 0;
+
+      for (let i = 0; i < profileData.rivals.length; i++) {
+        if (profileData.rivals[i].id !== id) {
+          continue;
+        }
+        tempIndex = i;
+        setRivalIndex(i);
+        break;
+      }
+
+      if (profileData.rivals[tempIndex]) {
+        setRivalData(profileData.rivals[tempIndex]);
+        setImageValue(profileData.rivals[tempIndex].image);
+        return;
       }
     }
-  }, [id, parsedId, profileData.rivals]);
+  }, [id, profileData.rivals]);
 
   function handleImageChange() {
     if (imageRef.current === null) {
@@ -74,12 +87,9 @@ export function RivalForm({ setOpenModal }: Props) {
     }
   }
 
-  function updateRivalData(updatedRivalData: Rival, rivalId: number | null) {
-    if (rivalId === null) {
-      throw new Error("You're giving me a rivalId that is null");
-    }
+  function updateRivalData(updatedRivalData: Rival) {
     const updatedRivals = [...profileData.rivals];
-    updatedRivals[rivalId] = updatedRivalData;
+    updatedRivals[rivalIndex] = updatedRivalData;
 
     setProfileData({
       ...profileData,
@@ -104,15 +114,16 @@ export function RivalForm({ setOpenModal }: Props) {
       );
     }
 
-    const updatedRivalData: Rival = {
+    const newRivalData: Rival = {
+      id: rivalData?.id || uuidv4(),
       nickname: nicknameRef.current.value,
       image: imageRef.current.value,
     };
 
     if (rivalData) {
-      updateRivalData(updatedRivalData, parsedId);
+      updateRivalData(newRivalData);
     } else {
-      addNewRival(updatedRivalData);
+      addNewRival(newRivalData);
     }
   }
   return (

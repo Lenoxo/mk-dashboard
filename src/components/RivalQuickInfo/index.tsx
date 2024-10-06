@@ -4,18 +4,15 @@ import "./styles.css";
 interface Props {
   name: string;
   image: string;
-  rivalIndex: number;
+  rivalId: string;
 }
 
-export function RivalQuickInfo({ name, image, rivalIndex }: Props) {
+export function RivalQuickInfo({ name, image, rivalId }: Props) {
   return (
     <article className="rivalQuickInfo">
       <img className="rivalQuickInfo__image" src={image} />
       <p className="rivalQuickInfo__nickname">{name}</p>
-      <Link
-        className="rivalQuickInfo__edit"
-        to={`/profile/rivals/${rivalIndex}`}
-      >
+      <Link className="rivalQuickInfo__edit" to={`/profile/rivals/${rivalId}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

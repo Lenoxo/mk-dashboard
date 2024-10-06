@@ -54,7 +54,7 @@ export function NewFightForm({ setOpenModal }: Props) {
 
     const newFight: HistoryEntry = {
       date: currentDate,
-      rival: rivalRef.current?.value || "",
+      rivalId: rivalRef.current?.value || "",
       character2: selectedCharacter2?.name || "",
       character1: selectedCharacter1?.name || "",
       win: winRef.current?.checked ? true : false,
@@ -87,7 +87,7 @@ export function NewFightForm({ setOpenModal }: Props) {
             <option
               key={index}
               className="form__select__option"
-              value={rival.nickname}
+              value={rival.id}
             >
               {rival.nickname}
             </option>

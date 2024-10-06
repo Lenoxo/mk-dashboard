@@ -21,6 +21,7 @@ function AppProvider({ children }: { children: ReactNode }) {
     image: "https://avatarfiles.alphacoders.com/359/thumb-1920-359966.jpg",
     rivals: [
       {
+        id: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         nickname: "Rival 1",
         image: "https://avatarfiles.alphacoders.com/362/thumb-1920-362804.jpg",
       },
@@ -28,21 +29,21 @@ function AppProvider({ children }: { children: ReactNode }) {
     history: [
       {
         date: currentDate,
-        rival: "Rival 1",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
         win: true,
       },
       {
         date: currentDate,
-        rival: "Rival 1",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
         win: false,
       },
       {
         date: currentDate,
-        rival: "Rival 1",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
         win: true,
