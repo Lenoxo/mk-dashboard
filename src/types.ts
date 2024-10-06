@@ -7,13 +7,14 @@ export interface ProfileData {
 
 export interface HistoryEntry {
   date: string;
-  rival: string;
+  rivalId: string;
   character1: string;
   character2: string;
   win: boolean;
 }
 
 export interface Rival {
+  id: string;
   nickname: string;
   image: string;
 }

@@ -14,13 +14,16 @@ export function HistoryPage() {
     <div>
       <p>History</p>
       <ul>
-        {profileData.history.map((fight) => {
+        {profileData.history.map((fight, index) => {
+          const rivalData = profileData.rivals.find(
+            (rival) => rival.id === fight.rivalId,
+          );
           return (
-            <li>
+            <li key={index}>
               <p>{fight.win ? "true" : "false"}</p>
               <p>{fight.character1}</p>
               <p>{fight.character2}</p>
-              <p>{fight.rival}</p>
+              <p>{rivalData?.nickname}</p>
               <p>{fight.date}</p>
             </li>
           );

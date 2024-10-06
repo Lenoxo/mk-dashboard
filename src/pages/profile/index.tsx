@@ -29,7 +29,7 @@ export function ProfilePage() {
           return (
             <RivalQuickInfo
               key={index}
-              rivalIndex={index}
+              rivalId={rival.id}
               name={rival.nickname}
               image={rival.image}
             />
