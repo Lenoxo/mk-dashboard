@@ -1,0 +1,38 @@
+.history {
+  display: grid;
+  place-items: center;
+  width: 90vw;
+}
+
+.history__title {
+  font-size: 2rem;
+}
+
+.history__date {
+  font-size: 1.4rem;
+}
+
+.history__victoriesCounter {
+  font-size: 1.2rem;
+}
+
+.fightList {
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+}
+
+.fightItem__playerImage,
+.fightItem__rivalImage {
+  width: 6rem;
+  height: 6rem;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.fightItem {
+  list-style: none;
+  border: 2px solid white;
+  border-radius: 2rem;
+  width: 60vw;
+}
