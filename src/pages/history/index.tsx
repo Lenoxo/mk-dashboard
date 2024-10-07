@@ -37,24 +37,35 @@ export function HistoryPage() {
           );
           return (
             <li key={index} className="fightItem">
-              <div>
-                <p className="fightItem__profileNickname">
-                  {profileData.nickname}
+              <div className="fightItem__thumbnailsContainer">
+                <div className="fightItem__thumbnail">
+                  <p className="fightItem__playerNickname">
+                    {profileData.nickname}
+                  </p>
+                  <img
+                    className="fightItem__playerImage"
+                    src={profileData.image}
+                  />
+                  <p className="fightItem__character1Text">
+                    {fight.character1}
+                  </p>
+                </div>
+                <p className="fightItem__result">
+                  {fight.win ? "WIN" : "LOSE"}
                 </p>
-                <img
-                  className="fightItem__playerImage"
-                  src={profileData.image}
-                />
+                <div className="fightItem__thumbnail">
+                  <p className="fightItem__rivalNickname">
+                    {rivalData?.nickname}
+                  </p>
+                  <img
+                    className="fightItem__rivalImage"
+                    src={rivalData?.image}
+                  />
+                  <p className="fightItem__character2Text">
+                    {fight.character2}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="fightItem__rivalNickname">
-                  {rivalData?.nickname}
-                </p>
-                <img className="fightItem__rivalImage" src={rivalData?.image} />
-              </div>
-              <p className="fightItem__result">{fight.win ? "WIN" : "LOSE"}</p>
-              <p className="fightItem__character1Text">{fight.character1}</p>
-              <p className="fightItem__character2Text">{fight.character2}</p>
             </li>
           );
         })}
