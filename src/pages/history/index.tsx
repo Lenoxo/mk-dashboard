@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context";
 import "./styles.css";
+import { countVictoriesAndDefeats, currentDate } from "../../utils";
+import { HistoryEntry, ProfileData, Rival } from "../../types";
 
 export function HistoryPage() {
   const context = useContext(AppContext);
@@ -10,25 +12,72 @@ export function HistoryPage() {
 
   const { profileData } = context;
 
+  const [victoryCounter, setVictoryCounter] = useState<number>(0);
+  const [defeatCounter, setDefeatCounter] = useState<number>(0);
+
+  useEffect(() => {
+    if (profileData.history.length > 0) {
+      const { victories, defeats } = countVictoriesAndDefeats(
+        profileData.history,
+      );
+      setDefeatCounter(defeats);
+      setVictoryCounter(victories);
+    }
+  }, [profileData]);
   return (
-    <div>
-      <p>History</p>
-      <ul>
+    <section className="history">
+      <h2 className="history__title">History</h2>
+      <h3 className="history__date">{currentDate}</h3>
+      <h3 className="history__victoriesCounter">
+        {victoryCounter} {profileData.nickname} | {defeatCounter} RivalX
+      </h3>
+      <ul className="fightList">
         {profileData.history.map((fight, index) => {
           const rivalData = profileData.rivals.find(
             (rival) => rival.id === fight.rivalId,
           );
+
+          if (!rivalData) {
+            throw new Error(
+              "rivalData is undefined, so the fight.rivalId is pointing to a non existing rival",
+            );
+          }
           return (
-            <li key={index}>
-              <p>{fight.win ? "true" : "false"}</p>
-              <p>{fight.character1}</p>
-              <p>{fight.character2}</p>
-              <p>{rivalData?.nickname}</p>
-              <p>{fight.date}</p>
-            </li>
+            <FightResume
+              key={index}
+              profileData={profileData}
+              fight={fight}
+              rivalData={rivalData}
+            />
           );
         })}
       </ul>
-    </div>
+    </section>
+  );
+}
+
+interface FightResumeProps {
+  profileData: ProfileData;
+  fight: HistoryEntry;
+  rivalData: Rival;
+}
+
+function FightResume({ profileData, fight, rivalData }: FightResumeProps) {
+  return (
+    <li className="fightItem">
+      <div className="fightItem__thumbnailsContainer">
+        <div className="fightItem__thumbnail">
+          <p className="fightItem__playerNickname">{profileData.nickname}</p>
+          <img className="fightItem__playerImage" src={profileData.image} />
+          <p className="fightItem__character1Text">{fight.character1}</p>
+        </div>
+        <p className="fightItem__result">{fight.win ? "WIN" : "LOSE"}</p>
+        <div className="fightItem__thumbnail">
+          <p className="fightItem__rivalNickname">{rivalData?.nickname}</p>
+          <img className="fightItem__rivalImage" src={rivalData?.image} />
+          <p className="fightItem__character2Text">{fight.character2}</p>
+        </div>
+      </div>
+    </li>
   );
 }

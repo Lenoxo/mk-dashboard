@@ -1,0 +1,63 @@
+.history {
+  display: grid;
+  place-items: center;
+  /*width: 90vw;*/
+}
+
+.history__title {
+  font-size: 2rem;
+}
+
+.history__date {
+  font-size: 1.4rem;
+}
+
+.history__victoriesCounter {
+  font-size: 1.2rem;
+}
+
+.fightList {
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+  padding: 0;
+}
+
+.fightItem {
+  list-style: none;
+  border: 2px solid white;
+  border-radius: 2rem;
+  width: 70vw;
+  padding: 1.5rem;
+}
+
+.fightItem__thumbnailsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fightItem__thumbnail {
+  display: grid;
+  place-items: center;
+}
+
+.fightItem__playerNickname,
+.fightItem__rivalNickname,
+.fightItem__result {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.fightItem__result {
+  font-weight: bolder;
+}
+
+.fightItem__playerImage,
+.fightItem__rivalImage {
+  width: 6rem;
+  height: 6rem;
+  border: 2px solid white;
+  border-radius: 50%;
+}
