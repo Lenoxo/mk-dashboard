@@ -2,6 +2,7 @@ body {
   margin: 0;
   color: white;
   background-color: #1b1b1b;
+  box-sizing: border-box;
 }
 
 main {
