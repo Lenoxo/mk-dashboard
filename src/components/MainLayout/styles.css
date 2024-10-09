@@ -1,0 +1,52 @@
+.appWrapper {
+  transform: translate(0vw);
+  transition-duration: 300ms;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+}
+
+.appWrapper--move {
+  transform: translate(-60vw);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color: #1b1b1b;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  box-sizing: border-box;
+  border-bottom: 2px solid #2a2c2f;
+}
+
+.header__button {
+  width: 15%;
+  height: 90%;
+  background-color: inherit;
+  border: 1px solid white;
+  border-radius: 1rem;
+  color: inherit;
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease; /* Añadido */
+  opacity: 1; /* Estado visible */
+}
+
+.header__button--disabled {
+  border: 1px solid transparent;
+  color: transparent;
+  opacity: 0.5; /* Estado deshabilitado con menor opacidad */
+  pointer-events: none; /* Evitar interacción cuando está deshabilitado */
+}
+
+.header__button__icon {
+  height: 100%;
+  width: 100%;
+}
