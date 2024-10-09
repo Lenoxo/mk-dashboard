@@ -24,11 +24,13 @@
   transform: translate(-60vw);
 }
 
-.navbar__link {
+.navbar__link,
+.navbar__button {
   width: auto;
   height: 2rem;
   text-decoration: none;
   color: #d7eae3;
+  background-color: inherit;
   /*background-color: #183d3d;*/
   /*border: 2px solid #5c8374;*/
   padding: 1.5rem;
@@ -38,6 +40,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: none;
+}
+
+.navbar__button {
+  height: 7rem;
+  justify-content: center;
 }
 
 .navbar__link:hover {
