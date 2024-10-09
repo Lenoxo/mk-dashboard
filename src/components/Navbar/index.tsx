@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import "./styles.css";
 
-export function AsideNav() {
+export function Navbar({ setOpen, open }) {
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${open && "navbar--show"}`}>
       <NavLink className="navbar__link" to="/">
         <svg
           className="navbar__link__icon"
@@ -55,6 +55,7 @@ export function AsideNav() {
         </svg>
         <p className="navbar__link__text">History</p>
       </NavLink>
+      <button onClick={() => setOpen(!open)}>Click me to toggle</button>
     </nav>
   );
 }

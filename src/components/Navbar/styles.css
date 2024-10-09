@@ -1,6 +1,6 @@
 .navbar {
   position: fixed;
-  right: 0;
+  /*right: 0;*/
   width: 60%;
   height: 100vh;
   background-color: #1d1e20;
@@ -10,6 +10,17 @@
   flex-direction: column;
   /*justify-content: space-around;*/
   z-index: 1;
+  top: 0px;
+  left: auto;
+  right: -300px;
+  /*transform: translate(-300px);*/
+  transform: translate(0px);
+  transition-duration: 300ms;
+  backface-visibility: hidden;
+}
+
+.navbar--show {
+  transform: translate(-300px);
 }
 
 .navbar__link {
