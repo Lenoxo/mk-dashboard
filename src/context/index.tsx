@@ -1,6 +1,11 @@
 import { createContext } from "react";
 import { ReactNode, useEffect, useState } from "react";
-import { ProfileData, CharacterData, HistoryEntry } from "../types";
+import {
+  ProfileData,
+  CharacterData,
+  HistoryEntry,
+  HistoryEntries,
+} from "../types";
 import { currentDate, countVictoriesAndDefeats } from "../utils";
 
 interface AppContextType {
@@ -11,6 +16,8 @@ interface AppContextType {
   victoryCounter: number;
   defeatCounter: number;
   currentDayFights: HistoryEntry[];
+  historyEntries: HistoryEntries;
+  setHistoryEntries: React.Dispatch<React.SetStateAction<HistoryEntries>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -51,6 +58,40 @@ function AppProvider({ children }: { children: ReactNode }) {
     ],
   });
 
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntries>({
+    "14/10/2024": [
+      {
+        date: currentDate,
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: true,
+      },
+      {
+        date: currentDate,
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: false,
+      },
+      {
+        date: currentDate,
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: true,
+      },
+    ],
+    "13/10/2024": [
+      {
+        date: "2024-10-13",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: true,
+      },
+    ],
+  });
   const [charactersData, setCharactersData] = useState<CharacterData[]>([
     { name: "Scorpion", imageUrl: "https://imgur.com/609Ay70.png" },
     { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
@@ -81,6 +122,8 @@ function AppProvider({ children }: { children: ReactNode }) {
         victoryCounter,
         defeatCounter,
         currentDayFights,
+        historyEntries,
+        setHistoryEntries,
       }}
     >
       {children}
