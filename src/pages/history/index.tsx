@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context";
-import "./styles.css";
-import { countVictoriesAndDefeats, currentDate } from "../../utils";
+import { countVictoriesAndDefeats } from "../../utils";
 import { HistoryEntry, ProfileData, Rival } from "../../types";
+import "./styles.css";
 
 export function HistoryPage() {
   const context = useContext(AppContext);
@@ -10,7 +10,7 @@ export function HistoryPage() {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const { profileData } = context;
+  const { profileData, historyEntries } = context;
 
   const [victoryCounter, setVictoryCounter] = useState<number>(0);
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
@@ -24,34 +24,39 @@ export function HistoryPage() {
       setVictoryCounter(victories);
     }
   }, [profileData]);
-  return (
-    <section className="history">
-      <h2 className="history__title">History</h2>
-      <h3 className="history__date">{currentDate}</h3>
-      <h3 className="history__victoriesCounter">
-        {victoryCounter} {profileData.nickname} | {defeatCounter} RivalX
-      </h3>
-      <ul className="fightList">
-        {profileData.history.map((fight, index) => {
-          const rivalData = profileData.rivals.find(
-            (rival) => rival.id === fight.rivalId,
-          );
 
-          if (!rivalData) {
-            throw new Error(
-              "rivalData is undefined, so the fight.rivalId is pointing to a non existing rival",
-            );
-          }
-          return (
-            <FightResume
-              key={index}
-              profileData={profileData}
-              fight={fight}
-              rivalData={rivalData}
-            />
-          );
-        })}
-      </ul>
+  return (
+    <section className="container">
+      <h2 className="container__title">History</h2>
+      {Object.keys(historyEntries).map((date) => {
+        return (
+          <article className="history" key={date}>
+            <h3 className="history__date">{date}</h3>
+            <ul className="fightList">
+              {historyEntries[date].map((entry, index) => {
+                // Busca la información del rival usando su ID
+                const rivalData = profileData.rivals.find(
+                  (rival) => rival.id === entry.rivalId,
+                );
+
+                if (!rivalData) {
+                  throw new Error(
+                    "rivalData is undefined, so the entry.rivalId is pointing to a non existing rival",
+                  );
+                }
+                return (
+                  <FightResume
+                    key={index}
+                    profileData={profileData}
+                    fight={entry}
+                    rivalData={rivalData}
+                  />
+                );
+              })}
+            </ul>
+          </article>
+        );
+      })}
     </section>
   );
 }

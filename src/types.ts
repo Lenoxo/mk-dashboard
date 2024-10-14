@@ -5,6 +5,8 @@ export interface ProfileData {
   history: HistoryEntry[];
 }
 
+export type HistoryEntries = Record<string, HistoryEntry[]>;
+
 export interface HistoryEntry {
   date: string;
   rivalId: string;

@@ -1,19 +1,15 @@
-.history {
+.history,
+.container {
   display: grid;
   place-items: center;
-  /*width: 90vw;*/
 }
 
-.history__title {
+.container__title {
   font-size: 2rem;
 }
 
 .history__date {
   font-size: 1.4rem;
-}
-
-.history__victoriesCounter {
-  font-size: 1.2rem;
 }
 
 .fightList {
