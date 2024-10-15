@@ -18,6 +18,7 @@ interface AppContextType {
   currentDayFights: HistoryEntry[];
   historyEntries: HistoryEntries;
   setHistoryEntries: React.Dispatch<React.SetStateAction<HistoryEntries>>;
+  setCurrentDayFights: React.Dispatch<React.SetStateAction<HistoryEntry[]>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -102,15 +103,19 @@ function AppProvider({ children }: { children: ReactNode }) {
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
 
   useEffect(() => {
-    if (profileData.history.length > 0) {
-      setCurrentDayFights(profileData.history);
+    if (!historyEntries[currentDate]) {
+      // Because in this case there are no existing fights for the currentDate
+      return;
+    }
+    if (historyEntries[currentDate].length > 0) {
+      setCurrentDayFights(historyEntries[currentDate]);
       const { victories, defeats } = countVictoriesAndDefeats(
-        profileData.history,
+        historyEntries[currentDate],
       );
       setDefeatCounter(defeats);
       setVictoryCounter(victories);
     }
-  }, [profileData]);
+  }, [historyEntries]);
 
   return (
     <AppContext.Provider
@@ -124,6 +129,7 @@ function AppProvider({ children }: { children: ReactNode }) {
         currentDayFights,
         historyEntries,
         setHistoryEntries,
+        setCurrentDayFights,
       }}
     >
       {children}
