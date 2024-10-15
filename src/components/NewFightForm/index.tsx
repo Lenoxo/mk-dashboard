@@ -6,9 +6,6 @@ import { AppContext } from "../../context";
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  // setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
-  // profileData: ProfileData;
-  // charactersData: CharacterData[];
 }
 
 export function NewFightForm({ setOpenModal }: Props) {
@@ -17,7 +14,13 @@ export function NewFightForm({ setOpenModal }: Props) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const { setProfileData, profileData, charactersData } = context;
+  const {
+    profileData,
+    charactersData,
+    historyEntries,
+    setHistoryEntries,
+    setCurrentDayFights,
+  } = context;
 
   const rivalRef = useRef<HTMLSelectElement>(null);
   const character1Ref = useRef<HTMLSelectElement>(null);
@@ -60,13 +63,14 @@ export function NewFightForm({ setOpenModal }: Props) {
       win: winRef.current?.checked ? true : false,
     };
 
-    const updatedHistory = [...profileData.history];
-    updatedHistory.push(newFight);
-
-    setProfileData({
-      ...profileData,
-      history: updatedHistory,
-    });
+    const updatedHistory = { ...historyEntries };
+    if (!updatedHistory[currentDate]) {
+      updatedHistory[currentDate] = [newFight];
+    } else {
+      updatedHistory[currentDate].push(newFight);
+    }
+    setHistoryEntries(updatedHistory);
+    setCurrentDayFights(updatedHistory[currentDate]);
 
     setOpenModal(false);
   }
