@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../context";
-import { countVictoriesAndDefeats } from "../../utils";
 import { HistoryEntry, ProfileData, Rival } from "../../types";
 import "./styles.css";
 
@@ -11,19 +10,6 @@ export function HistoryPage() {
   }
 
   const { profileData, historyEntries } = context;
-
-  const [victoryCounter, setVictoryCounter] = useState<number>(0);
-  const [defeatCounter, setDefeatCounter] = useState<number>(0);
-
-  useEffect(() => {
-    if (profileData.history.length > 0) {
-      const { victories, defeats } = countVictoriesAndDefeats(
-        profileData.history,
-      );
-      setDefeatCounter(defeats);
-      setVictoryCounter(victories);
-    }
-  }, [profileData]);
 
   return (
     <section className="container">
