@@ -14,35 +14,37 @@ export function HistoryPage() {
   return (
     <section className="container">
       <h2 className="container__title">History</h2>
-      {Object.keys(historyEntries).map((date) => {
-        return (
-          <article className="history" key={date}>
-            <h3 className="history__date">{date}</h3>
-            <ul className="fightList">
-              {historyEntries[date].map((entry, index) => {
-                // Busca la información del rival usando su ID
-                const rivalData = profileData.rivals.find(
-                  (rival) => rival.id === entry.rivalId,
-                );
-
-                if (!rivalData) {
-                  throw new Error(
-                    "rivalData is undefined, so the entry.rivalId is pointing to a non existing rival",
+      {Object.keys(historyEntries)
+        .reverse()
+        .map((date) => {
+          return (
+            <article className="history" key={date}>
+              <h3 className="history__date">{date}</h3>
+              <ul className="fightList">
+                {historyEntries[date].map((entry, index) => {
+                  // Busca la información del rival usando su ID
+                  const rivalData = profileData.rivals.find(
+                    (rival) => rival.id === entry.rivalId,
                   );
-                }
-                return (
-                  <FightResume
-                    key={index}
-                    profileData={profileData}
-                    fight={entry}
-                    rivalData={rivalData}
-                  />
-                );
-              })}
-            </ul>
-          </article>
-        );
-      })}
+
+                  if (!rivalData) {
+                    throw new Error(
+                      "rivalData is undefined, so the entry.rivalId is pointing to a non existing rival",
+                    );
+                  }
+                  return (
+                    <FightResume
+                      key={index}
+                      profileData={profileData}
+                      fight={entry}
+                      rivalData={rivalData}
+                    />
+                  );
+                })}
+              </ul>
+            </article>
+          );
+        })}
     </section>
   );
 }

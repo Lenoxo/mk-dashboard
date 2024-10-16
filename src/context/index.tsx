@@ -34,32 +34,18 @@ function AppProvider({ children }: { children: ReactNode }) {
         image: "https://avatarfiles.alphacoders.com/362/thumb-1920-362804.jpg",
       },
     ],
-    history: [
+  });
+
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntries>({
+    "13/10/2024": [
       {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: true,
-      },
-      {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: false,
-      },
-      {
-        date: currentDate,
+        date: "2024-10-13",
         rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
         win: true,
       },
     ],
-  });
-
-  const [historyEntries, setHistoryEntries] = useState<HistoryEntries>({
     "14/10/2024": [
       {
         date: currentDate,
@@ -77,15 +63,6 @@ function AppProvider({ children }: { children: ReactNode }) {
       },
       {
         date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: true,
-      },
-    ],
-    "13/10/2024": [
-      {
-        date: "2024-10-13",
         rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
