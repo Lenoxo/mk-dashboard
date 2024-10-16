@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context";
 import { HistoryEntry, ProfileData, Rival } from "../../types";
 import "./styles.css";
+import { currentDate } from "../../utils";
 
 export function HistoryPage() {
   const context = useContext(AppContext);
@@ -9,8 +10,36 @@ export function HistoryPage() {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const { profileData, historyEntries } = context;
+  const {
+    setCurrentDayFights,
+    profileData,
+    historyEntries,
+    setHistoryEntries,
+    countVictoriesAndDefeats,
+  } = context;
 
+  // TODO: Optimize the history render and delete if possible
+
+  function handleFightDelete(fight: HistoryEntry, fightIndex: number) {
+    const updatedEntries = { ...historyEntries };
+    let dayFights = updatedEntries[fight.date];
+
+    dayFights = dayFights.filter(
+      (entry) => dayFights.indexOf(entry) !== fightIndex,
+    );
+    updatedEntries[fight.date] = dayFights;
+
+    if (updatedEntries[fight.date].length === 0) {
+      delete updatedEntries[fight.date];
+    }
+
+    setHistoryEntries(updatedEntries);
+
+    if (fight.date === currentDate) {
+      setCurrentDayFights(updatedEntries[currentDate]);
+      countVictoriesAndDefeats(updatedEntries[currentDate]);
+    }
+  }
   return (
     <section className="container">
       <h2 className="container__title">History</h2>
@@ -35,9 +64,11 @@ export function HistoryPage() {
                   return (
                     <FightResume
                       key={index}
+                      index={index}
                       profileData={profileData}
                       fight={entry}
                       rivalData={rivalData}
+                      deleteFight={handleFightDelete}
                     />
                   );
                 })}
@@ -50,12 +81,20 @@ export function HistoryPage() {
 }
 
 interface FightResumeProps {
+  index: number;
   profileData: ProfileData;
   fight: HistoryEntry;
   rivalData: Rival;
+  deleteFight(arg0: HistoryEntry, arg1: number): void;
 }
 
-function FightResume({ profileData, fight, rivalData }: FightResumeProps) {
+function FightResume({
+  index,
+  profileData,
+  fight,
+  rivalData,
+  deleteFight,
+}: FightResumeProps) {
   return (
     <li className="fightItem">
       <div className="fightItem__thumbnailsContainer">
@@ -65,6 +104,7 @@ function FightResume({ profileData, fight, rivalData }: FightResumeProps) {
           <p className="fightItem__character1Text">{fight.character1}</p>
         </div>
         <p className="fightItem__result">{fight.win ? "WIN" : "LOSE"}</p>
+        <button onClick={() => deleteFight(fight, index)}>Delete</button>
         <div className="fightItem__thumbnail">
           <p className="fightItem__rivalNickname">{rivalData?.nickname}</p>
           <img className="fightItem__rivalImage" src={rivalData?.image} />
