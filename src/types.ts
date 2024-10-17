@@ -2,7 +2,6 @@ export interface ProfileData {
   nickname: string;
   image: string;
   rivals: Rival[];
-  history: HistoryEntry[];
 }
 
 export type HistoryEntries = Record<string, HistoryEntry[]>;

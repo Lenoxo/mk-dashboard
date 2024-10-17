@@ -6,7 +6,7 @@ import {
   HistoryEntry,
   HistoryEntries,
 } from "../types";
-import { currentDate, countVictoriesAndDefeats } from "../utils";
+import { currentDate } from "../utils";
 
 interface AppContextType {
   profileData: ProfileData;
@@ -19,6 +19,7 @@ interface AppContextType {
   historyEntries: HistoryEntries;
   setHistoryEntries: React.Dispatch<React.SetStateAction<HistoryEntries>>;
   setCurrentDayFights: React.Dispatch<React.SetStateAction<HistoryEntry[]>>;
+  countVictoriesAndDefeats(history: HistoryEntry[]): void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -34,58 +35,35 @@ function AppProvider({ children }: { children: ReactNode }) {
         image: "https://avatarfiles.alphacoders.com/362/thumb-1920-362804.jpg",
       },
     ],
-    history: [
-      {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: true,
-      },
-      {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: false,
-      },
-      {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: true,
-      },
-    ],
   });
 
   const [historyEntries, setHistoryEntries] = useState<HistoryEntries>({
-    "14/10/2024": [
+    "13/10/2024": [
       {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: true,
-      },
-      {
-        date: currentDate,
-        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
-        character2: "Scorpion",
-        character1: "Subzero",
-        win: false,
-      },
-      {
-        date: currentDate,
+        date: "13/10/2024",
         rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
         win: true,
       },
     ],
-    "13/10/2024": [
+    "14/10/2024": [
       {
-        date: "2024-10-13",
+        date: "14/10/2024",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: true,
+      },
+      {
+        date: "14/10/2024",
+        rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
+        character2: "Scorpion",
+        character1: "Subzero",
+        win: false,
+      },
+      {
+        date: "14/10/2024",
         rivalId: "a0c5d418-9894-4ecf-8b98-d5fcabc2aa25",
         character2: "Scorpion",
         character1: "Subzero",
@@ -102,6 +80,28 @@ function AppProvider({ children }: { children: ReactNode }) {
   const [victoryCounter, setVictoryCounter] = useState<number>(0);
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
 
+  function countVictoriesAndDefeats(history: HistoryEntry[] | undefined) {
+    let victories: number = 0;
+    let defeats: number = 0;
+    if (!history) {
+      // Because in this case there aren't any fights to count
+      // So I reset the counters to default values
+      setVictoryCounter(victories);
+      setDefeatCounter(defeats);
+      return;
+    }
+
+    history.forEach((fight) => {
+      if (fight.win) {
+        victories++;
+      } else {
+        defeats++;
+      }
+    });
+    setVictoryCounter(victories);
+    setDefeatCounter(defeats);
+  }
+
   useEffect(() => {
     if (!historyEntries[currentDate]) {
       // Because in this case there are no existing fights for the currentDate
@@ -109,11 +109,7 @@ function AppProvider({ children }: { children: ReactNode }) {
     }
     if (historyEntries[currentDate].length > 0) {
       setCurrentDayFights(historyEntries[currentDate]);
-      const { victories, defeats } = countVictoriesAndDefeats(
-        historyEntries[currentDate],
-      );
-      setDefeatCounter(defeats);
-      setVictoryCounter(victories);
+      countVictoriesAndDefeats(historyEntries[currentDate]);
     }
   }, [historyEntries]);
 
@@ -130,6 +126,7 @@ function AppProvider({ children }: { children: ReactNode }) {
         historyEntries,
         setHistoryEntries,
         setCurrentDayFights,
+        countVictoriesAndDefeats,
       }}
     >
       {children}
