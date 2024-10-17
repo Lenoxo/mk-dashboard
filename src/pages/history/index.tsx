@@ -98,8 +98,29 @@ function FightResume({
           <img className="fightItem__playerImage" src={profileData.image} />
           <p className="fightItem__character1Text">{fight.character1}</p>
         </div>
-        <p className="fightItem__result">{fight.win ? "WIN" : "LOSE"}</p>
-        <button onClick={() => deleteFight(fight, index)}>Delete</button>
+        <div className="resultContainer">
+          <p className="resultContainer__result">
+            {fight.win ? "WIN" : "LOSE"}
+          </p>
+          <button
+            className="deleteFight"
+            onClick={() => deleteFight(fight, index)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          </button>
+        </div>
         <div className="fightItem__thumbnail">
           <p className="fightItem__rivalNickname">{rivalData?.nickname}</p>
           <img className="fightItem__rivalImage" src={rivalData?.image} />
