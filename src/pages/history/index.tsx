@@ -22,12 +22,7 @@ export function HistoryPage() {
 
   function handleFightDelete(fight: HistoryEntry, fightIndex: number) {
     const updatedEntries = { ...historyEntries };
-    let dayFights = updatedEntries[fight.date];
-
-    dayFights = dayFights.filter(
-      (entry) => dayFights.indexOf(entry) !== fightIndex,
-    );
-    updatedEntries[fight.date] = dayFights;
+    updatedEntries[fight.date].splice(fightIndex, 1);
 
     if (updatedEntries[fight.date].length === 0) {
       delete updatedEntries[fight.date];
