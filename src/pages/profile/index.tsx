@@ -7,20 +7,27 @@ import { RivalForm } from "../../components/RivalForm";
 import { RivalQuickInfo } from "../../components/RivalQuickInfo";
 import "./styles.css";
 import { Rival } from "../../types";
+import { currentDate } from "../../utils";
 
 export function ProfilePage() {
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
-  const { profileData, historyEntries, setProfileData, setHistoryEntries } =
-    context;
+  const {
+    profileData,
+    historyEntries,
+    setProfileData,
+    setHistoryEntries,
+    setCurrentDayFights,
+  } = context;
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   function handleRivalDelete(rivalId: Rival["id"]) {
-    console.warn(historyEntries);
     const updatedHistoryEntries = { ...historyEntries };
+
+    // TODO: Refactor this to a context function or a easier to read one
 
     for (const date in updatedHistoryEntries) {
       if (Object.prototype.hasOwnProperty.call(updatedHistoryEntries, date)) {
@@ -34,6 +41,12 @@ export function ProfilePage() {
           updatedHistoryEntries[date] = filteredFights;
         }
       }
+
+      if (date !== currentDate) {
+        continue;
+      }
+
+      setCurrentDayFights(updatedHistoryEntries[date]);
     }
 
     setHistoryEntries(updatedHistoryEntries);
