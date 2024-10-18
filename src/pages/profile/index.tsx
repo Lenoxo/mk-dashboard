@@ -27,19 +27,15 @@ export function ProfilePage() {
   function handleRivalDelete(rivalId: Rival["id"]) {
     const updatedHistoryEntries = { ...historyEntries };
 
-    // TODO: Refactor this to a context function or a easier to read one
-
     for (const date in updatedHistoryEntries) {
-      if (Object.prototype.hasOwnProperty.call(updatedHistoryEntries, date)) {
-        const filteredFights = updatedHistoryEntries[date].filter((entry) => {
-          return entry.rivalId !== rivalId;
-        });
+      const filteredFights = updatedHistoryEntries[date].filter((entry) => {
+        return entry.rivalId !== rivalId;
+      });
 
-        if (filteredFights.length === 0) {
-          delete updatedHistoryEntries[date];
-        } else {
-          updatedHistoryEntries[date] = filteredFights;
-        }
+      if (filteredFights.length === 0) {
+        delete updatedHistoryEntries[date];
+      } else {
+        updatedHistoryEntries[date] = filteredFights;
       }
 
       if (date !== currentDate) {

@@ -7,6 +7,7 @@ import { HistoryEntry } from "./types";
 import { Modal } from "./components/Modal";
 import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
+import { NewUserGuide } from "./components/NewUserGuide";
 
 function App() {
   const context = useContext(AppContext);
@@ -22,14 +23,13 @@ function App() {
     currentDayFights,
   } = context;
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [isRivalData, setIsRivalData] = useState<boolean>(
-    profileData.rivals.length > 0,
-  );
+  const [isRivalData] = useState<boolean>(profileData.rivals.length > 0);
 
   return (
     <>
-      {/* <header>MK-Dashboard</header> */}
-      {isRivalData && (
+      {!isRivalData ? (
+        <NewUserGuide />
+      ) : (
         <TopBar
           playerName={profileData.nickname}
           playerImage={profileData.image}
@@ -39,7 +39,7 @@ function App() {
           defeatCounter={defeatCounter}
         />
       )}
-      <main>
+      <section className="currentDayFights">
         {currentDayFights
           ?.map((fight: HistoryEntry, index) => {
             const character1Data = charactersData.find(
@@ -73,9 +73,9 @@ function App() {
             );
           })
           .reverse()}
-      </main>
+      </section>
 
-      <AddFightButton setOpenModal={setOpenModal} />
+      {isRivalData && <AddFightButton setOpenModal={setOpenModal} />}
       {openModal && (
         <Modal>
           <NewFightForm setOpenModal={setOpenModal} />
