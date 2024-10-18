@@ -19,40 +19,35 @@ export function ProfilePage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   function handleRivalDelete(rivalId: Rival["id"]) {
+    console.warn(historyEntries);
     const updatedHistoryEntries = { ...historyEntries };
 
-    for (
-      let index = 0;
-      index < Object.values(updatedHistoryEntries).length;
-      index++
-    ) {
-      let dayFightsArray = Object.values(updatedHistoryEntries)[index];
-      let date = "";
-      const filteredFights = dayFightsArray.filter((entry) => {
-        date = entry.date;
-        return entry.rivalId !== rivalId;
-      });
-      
-      console.warn(filteredFights)
+    for (const date in updatedHistoryEntries) {
+      if (Object.prototype.hasOwnProperty.call(updatedHistoryEntries, date)) {
+        const filteredFights = updatedHistoryEntries[date].filter((entry) => {
+          return entry.rivalId !== rivalId;
+        });
 
-      dayFightsArray = filteredFights;
-
-      if (dayFightsArray.length === 0) {
-        delete updatedHistoryEntries[date];
+        if (filteredFights.length === 0) {
+          delete updatedHistoryEntries[date];
+        } else {
+          updatedHistoryEntries[date] = filteredFights;
+        }
       }
     }
 
     setHistoryEntries(updatedHistoryEntries);
 
-    // const updatedProfileData = { ...profileData };
-    // const rivals = updatedProfileData.rivals;
-    // const rivalIndex = rivals.findIndex((rival) => rival.id === rivalId);
+    const rivals = Array.from(profileData.rivals);
+    const rivalIndex = rivals.findIndex((rival) => rival.id === rivalId);
+    rivals.splice(rivalIndex, 1);
 
-    // rivals.splice(rivalIndex, 1);
-
-    // setProfileData(updatedProfileData);
+    setProfileData({
+      ...profileData,
+      rivals,
+    });
   }
-  
+
   return (
     <>
       <QuickInfo />
