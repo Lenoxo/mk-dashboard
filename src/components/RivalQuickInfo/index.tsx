@@ -29,9 +29,11 @@ export function RivalQuickInfo({ name, image, rivalId, deleteRival }: Props) {
           />
         </svg>
       </Link>
-      <button onClick={() => deleteRival(rivalId)}>
+      <button
+        className="rivalQuickInfo__delete"
+        onClick={() => deleteRival(rivalId)}
+      >
         <svg
-          className="rivalQuickInfo__delete"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
