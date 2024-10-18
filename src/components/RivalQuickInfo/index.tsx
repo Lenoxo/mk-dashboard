@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import "./styles.css";
+import { Rival } from "../../types";
 
 interface Props {
   name: string;
   image: string;
   rivalId: string;
+  deleteRival(rivalId: Rival["id"]): void;
 }
 
-export function RivalQuickInfo({ name, image, rivalId }: Props) {
+export function RivalQuickInfo({ name, image, rivalId, deleteRival }: Props) {
   return (
     <article className="rivalQuickInfo">
       <img className="rivalQuickInfo__image" src={image} />
@@ -27,20 +29,24 @@ export function RivalQuickInfo({ name, image, rivalId }: Props) {
           />
         </svg>
       </Link>
-      <svg
+      <button
         className="rivalQuickInfo__delete"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
+        onClick={() => deleteRival(rivalId)}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      </button>
     </article>
   );
 }

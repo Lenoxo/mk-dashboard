@@ -22,17 +22,23 @@ function App() {
     currentDayFights,
   } = context;
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [isRivalData, setIsRivalData] = useState<boolean>(
+    profileData.rivals.length > 0,
+  );
+
   return (
     <>
       {/* <header>MK-Dashboard</header> */}
-      <TopBar
-        playerName={profileData.nickname}
-        playerImage={profileData.image}
-        rivalName={profileData.rivals[0].nickname}
-        rivalImage={profileData.rivals[0].image}
-        victoryCounter={victoryCounter}
-        defeatCounter={defeatCounter}
-      />
+      {isRivalData && (
+        <TopBar
+          playerName={profileData.nickname}
+          playerImage={profileData.image}
+          rivalName={profileData.rivals[0].nickname}
+          rivalImage={profileData.rivals[0].image}
+          victoryCounter={victoryCounter}
+          defeatCounter={defeatCounter}
+        />
+      )}
       <main>
         {currentDayFights
           ?.map((fight: HistoryEntry, index) => {
