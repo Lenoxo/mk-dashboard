@@ -27,10 +27,15 @@ export function NewFightForm({ setOpenModal }: Props) {
   const character2Ref = useRef<HTMLSelectElement>(null);
   const winRef = useRef<HTMLInputElement>(null);
 
-  const rivalsList = profileData.rivals;
-
   const [selectedCharacter1, setSelectedCharacter1] = useState<CharacterData>();
   const [selectedCharacter2, setSelectedCharacter2] = useState<CharacterData>();
+
+  if (profileData === null) {
+    throw new Error(`profileData is null, this should not be possible at this stage,
+because you should only render NewFightForm when there is profileData`);
+  }
+
+  const rivalsList = profileData.rivals;
 
   function handleSelectCharacter1() {
     if (!character1Ref.current) {
@@ -108,6 +113,7 @@ export function NewFightForm({ setOpenModal }: Props) {
         name="character1Options"
         onChange={handleSelectCharacter1}
         ref={character1Ref}
+        required
       >
         <option className="form__select__option" value="">
           -- Choose an option --
@@ -139,6 +145,7 @@ export function NewFightForm({ setOpenModal }: Props) {
         name="character2Options"
         onChange={handleSelectCharacter2}
         ref={character2Ref}
+        required
       >
         <option className="form__select__option" value="">
           -- Choose an option --
