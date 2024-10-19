@@ -7,6 +7,7 @@ import { HistoryEntry } from "./types";
 import { Modal } from "./components/Modal";
 import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
+import { NoRivalsGuide } from "./components/NoRivalsGuide";
 
 function App() {
   const context = useContext(AppContext);
@@ -22,14 +23,12 @@ function App() {
     currentDayFights,
   } = context;
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [isRivalData, setIsRivalData] = useState<boolean>(
-    profileData.rivals.length > 0,
-  );
+  let isRivalData: boolean = false;
 
-  return (
-    <>
-      {/* <header>MK-Dashboard</header> */}
-      {isRivalData && (
+  function renderHeader() {
+    if (profileData && profileData.rivals.length > 0) {
+      isRivalData = true;
+      return (
         <TopBar
           playerName={profileData.nickname}
           playerImage={profileData.image}
@@ -38,8 +37,16 @@ function App() {
           victoryCounter={victoryCounter}
           defeatCounter={defeatCounter}
         />
-      )}
-      <main>
+      );
+    } else {
+      return <NoRivalsGuide />;
+    }
+  }
+
+  return (
+    <>
+      {renderHeader()}
+      <section className="currentDayFights">
         {currentDayFights
           ?.map((fight: HistoryEntry, index) => {
             const character1Data = charactersData.find(
@@ -73,9 +80,9 @@ function App() {
             );
           })
           .reverse()}
-      </main>
+      </section>
 
-      <AddFightButton setOpenModal={setOpenModal} />
+      {isRivalData && <AddFightButton setOpenModal={setOpenModal} />}
       {openModal && (
         <Modal>
           <NewFightForm setOpenModal={setOpenModal} />
