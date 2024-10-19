@@ -8,6 +8,7 @@ import { RivalQuickInfo } from "../../components/RivalQuickInfo";
 import "./styles.css";
 import { Rival } from "../../types";
 import { currentDate } from "../../utils";
+import { NewUserGuide } from "../../components/NewUserGuide";
 
 export function ProfilePage() {
   const context = useContext(AppContext);
@@ -25,6 +26,9 @@ export function ProfilePage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   function handleRivalDelete(rivalId: Rival["id"]) {
+    if (!profileData) {
+      throw new Error("profileData is null when trying to delete a rival");
+    }
     const updatedHistoryEntries = { ...historyEntries };
 
     for (const date in updatedHistoryEntries) {
@@ -59,15 +63,21 @@ export function ProfilePage() {
 
   return (
     <>
-      <QuickInfo />
-      <AddRival setOpenModal={setOpenModal} />
+      {!profileData ? (
+        <NewUserGuide />
+      ) : (
+        <>
+          <QuickInfo />
+          <AddRival setOpenModal={setOpenModal} />
+        </>
+      )}
       {openModal && (
         <Modal>
           <RivalForm setOpenModal={setOpenModal} />
         </Modal>
       )}
       <section className="profile__rivalsList">
-        {profileData.rivals.map((rival, index) => {
+        {profileData?.rivals.map((rival, index) => {
           return (
             <RivalQuickInfo
               key={index}

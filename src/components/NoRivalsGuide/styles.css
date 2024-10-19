@@ -1,0 +1,29 @@
+.noRivalsGuide {
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+}
+
+.noRivalsGuide__message {
+  text-align: center;
+}
+
+.link {
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  text-align: center;
+  width: 45vw;
+  height: 6vh;
+  border: 1px solid white;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  background-color: #2f2f2f;
+  cursor: pointer;
+}

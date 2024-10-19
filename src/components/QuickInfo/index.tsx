@@ -12,8 +12,8 @@ export function QuickInfo() {
 
   return (
     <header className="quickInfo">
-      <img src={profileData.image} className="quickInfo__image" />
-      <p className="quickInfo__nickname">{profileData.nickname}</p>
+      <img src={profileData?.image} className="quickInfo__image" />
+      <p className="quickInfo__nickname">{profileData?.nickname}</p>
       <Link className="quickInfo__edit" to="/profile/update">
         <svg
           xmlns="http://www.w3.org/2000/svg"

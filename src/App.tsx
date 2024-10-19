@@ -7,7 +7,7 @@ import { HistoryEntry } from "./types";
 import { Modal } from "./components/Modal";
 import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
-import { NewUserGuide } from "./components/NewUserGuide";
+import { NoRivalsGuide } from "./components/NoRivalsGuide";
 
 function App() {
   const context = useContext(AppContext);
@@ -23,13 +23,12 @@ function App() {
     currentDayFights,
   } = context;
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [isRivalData] = useState<boolean>(profileData.rivals.length > 0);
+  let isRivalData: boolean = false;
 
-  return (
-    <>
-      {!isRivalData ? (
-        <NewUserGuide />
-      ) : (
+  function renderHeader() {
+    if (profileData && profileData.rivals.length > 0) {
+      isRivalData = true;
+      return (
         <TopBar
           playerName={profileData.nickname}
           playerImage={profileData.image}
@@ -38,7 +37,15 @@ function App() {
           victoryCounter={victoryCounter}
           defeatCounter={defeatCounter}
         />
-      )}
+      );
+    } else {
+      return <NoRivalsGuide />;
+    }
+  }
+
+  return (
+    <>
+      {renderHeader()}
       <section className="currentDayFights">
         {currentDayFights
           ?.map((fight: HistoryEntry, index) => {

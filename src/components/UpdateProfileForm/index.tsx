@@ -51,11 +51,19 @@ export function UpdateProfileForm() {
       );
     }
 
-    setProfileData({
-      ...profileData,
-      nickname: nicknameRef.current.value,
-      image: imageRef.current.value,
-    });
+    if (!profileData) {
+      setProfileData({
+        nickname: nicknameRef.current.value,
+        image: imageRef.current.value,
+        rivals: [],
+      });
+    } else {
+      setProfileData({
+        ...profileData,
+        nickname: nicknameRef.current.value,
+        image: imageRef.current.value,
+      });
+    }
 
     navigate("/profile");
   }

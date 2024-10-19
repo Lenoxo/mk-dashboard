@@ -46,7 +46,11 @@ export function HistoryPage() {
               <h3 className="history__date">{date}</h3>
               <ul className="fightList">
                 {historyEntries[date].map((entry, index) => {
-                  // Busca la información del rival usando su ID
+                  if (!profileData) {
+                    // Because in this case, there will be no rivals to find their ids
+                    return;
+                  }
+                  // Search the rival info by their rivalId
                   const rivalData = profileData.rivals.find(
                     (rival) => rival.id === entry.rivalId,
                   );
