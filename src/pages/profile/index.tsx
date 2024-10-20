@@ -7,7 +7,6 @@ import { RivalForm } from "../../components/RivalForm";
 import { RivalQuickInfo } from "../../components/RivalQuickInfo";
 import "./styles.css";
 import { Rival } from "../../types";
-import { currentDate } from "../../utils";
 import { NewUserGuide } from "../../components/NewUserGuide";
 
 export function ProfilePage() {
@@ -15,13 +14,8 @@ export function ProfilePage() {
   if (!context) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
-  const {
-    profileData,
-    historyEntries,
-    setProfileData,
-    setHistoryEntries,
-    setCurrentDayFights,
-  } = context;
+  const { profileData, historyEntries, setProfileData, setHistoryEntries } =
+    context;
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -41,12 +35,6 @@ export function ProfilePage() {
       } else {
         updatedHistoryEntries[date] = filteredFights;
       }
-
-      if (date !== currentDate) {
-        continue;
-      }
-
-      setCurrentDayFights(updatedHistoryEntries[date]);
     }
 
     setHistoryEntries(updatedHistoryEntries);

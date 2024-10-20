@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AddFightButton } from "./components/AddFight";
 import { FightResult } from "./components/FightResult";
 import { TopBar } from "./components/Topbar";
@@ -22,13 +22,11 @@ function App() {
   const [currentRivalFights, setCurrentRivalFights] = useState<HistoryEntry[]>(
     [],
   );
-  const [currentRivalId, setCurrentRivalId] = useState<Rival["id"]>("");
-
-  const rivalRef = useRef<HTMLSelectElement>(null);
-  let isRivalData: boolean = false;
-
   const [victoryCounter, setVictoryCounter] = useState<number>(0);
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
+  const [currentRivalId, setCurrentRivalId] = useState<Rival["id"]>("");
+
+  let isRivalData: boolean = false;
 
   function countVictoriesAndDefeats(history: HistoryEntry[] | undefined) {
     let victories: number = 0;
@@ -57,7 +55,6 @@ function App() {
       // Because in this case there are no existing fights for the currentDate
       return;
     }
-
     if (historyEntries[currentDate].length > 0) {
       const filteredFights = historyEntries[currentDate].filter(
         (fight) => fight.rivalId === currentRivalId,
@@ -70,16 +67,21 @@ function App() {
   function renderHeader() {
     if (profileData && profileData.rivals.length > 0) {
       isRivalData = true;
+
+      const rivalData = profileData.rivals.find(
+        (rival) => rival.id === currentRivalId,
+      );
+
       return (
         <>
           <label className="form__label" htmlFor="rivalSelect">
             Choose your rival
           </label>
+
           <select
             className="form__select"
             id="rivalSelect"
             name="rivalOptions"
-            ref={rivalRef}
             onChange={(event) => setCurrentRivalId(event.target.value)}
           >
             <option value="">-- Choose a rival --</option>
@@ -91,14 +93,17 @@ function App() {
               );
             })}
           </select>
-          <TopBar
-            playerName={profileData.nickname}
-            playerImage={profileData.image}
-            rivalName={profileData.rivals[0].nickname}
-            rivalImage={profileData.rivals[0].image}
-            victoryCounter={victoryCounter}
-            defeatCounter={defeatCounter}
-          />
+
+          {rivalData && (
+            <TopBar
+              playerName={profileData.nickname}
+              playerImage={profileData.image}
+              rivalName={rivalData.nickname}
+              rivalImage={rivalData.image}
+              victoryCounter={victoryCounter}
+              defeatCounter={defeatCounter}
+            />
+          )}
         </>
       );
     } else {
