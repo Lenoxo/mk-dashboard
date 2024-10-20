@@ -19,7 +19,7 @@ export function NewFightForm({ setOpenModal }: Props) {
     charactersData,
     historyEntries,
     setHistoryEntries,
-    setCurrentDayFights,
+    // setCurrentDayFights,
   } = context;
 
   const rivalRef = useRef<HTMLSelectElement>(null);
@@ -75,7 +75,7 @@ because you should only render NewFightForm when there is profileData`);
       updatedHistory[currentDate].push(newFight);
     }
     setHistoryEntries(updatedHistory);
-    setCurrentDayFights(updatedHistory[currentDate]);
+    // setCurrentDayFights(updatedHistory[currentDate]);
 
     setOpenModal(false);
   }
