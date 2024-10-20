@@ -18,7 +18,7 @@ export function TopBar({
   defeatCounter,
 }: Props) {
   return (
-    <nav className="topbar">
+    <div className="topbar">
       <div className="playerThumbnail">
         <p className="playerThumbnail__nickname">{playerName}</p>
         <img className="playerThumbnail__picture" src={playerImage} />
@@ -30,6 +30,6 @@ export function TopBar({
         <p className="playerThumbnail__nickname">{rivalName}</p>
         <img className="playerThumbnail__picture" src={rivalImage} />
       </div>
-    </nav>
+    </div>
   );
 }

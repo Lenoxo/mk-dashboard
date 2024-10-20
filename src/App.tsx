@@ -74,6 +74,17 @@ function App() {
 
       return (
         <>
+          {rivalData && (
+            <TopBar
+              playerName={profileData.nickname}
+              playerImage={profileData.image}
+              rivalName={rivalData.nickname}
+              rivalImage={rivalData.image}
+              victoryCounter={victoryCounter}
+              defeatCounter={defeatCounter}
+            />
+          )}
+
           <label className="form__label" htmlFor="rivalSelect">
             Choose your rival
           </label>
@@ -93,17 +104,6 @@ function App() {
               );
             })}
           </select>
-
-          {rivalData && (
-            <TopBar
-              playerName={profileData.nickname}
-              playerImage={profileData.image}
-              rivalName={rivalData.nickname}
-              rivalImage={rivalData.image}
-              victoryCounter={victoryCounter}
-              defeatCounter={defeatCounter}
-            />
-          )}
         </>
       );
     } else {
