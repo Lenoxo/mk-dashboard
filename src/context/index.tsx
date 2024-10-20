@@ -79,13 +79,8 @@ function AppProvider({ children }: { children: ReactNode }) {
         setProfileData,
         charactersData,
         setCharactersData,
-        // victoryCounter,
-        // defeatCounter,
-        // currentDayFights,
         historyEntries,
         setHistoryEntries,
-        // setCurrentDayFights,
-        // countVictoriesAndDefeats,
       }}
     >
       {children}
