@@ -1,0 +1,20 @@
+.currentRival {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.currentRival__label {
+  font-weight: bold;
+}
+
+.currentRival__select {
+  background-color: #2f2f2f;
+  width: 45%;
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid whitesmoke;
+  font-weight: bolder;
+}

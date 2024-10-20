@@ -9,6 +9,7 @@ import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
 import { NoRivalsGuide } from "./components/NoRivalsGuide";
 import { currentDate } from "./utils";
+import { SelectCurrentRival } from "./components/SelectCurrentRival";
 
 function App() {
   const context = useContext(AppContext);
@@ -85,25 +86,10 @@ function App() {
             />
           )}
 
-          <label className="form__label" htmlFor="rivalSelect">
-            Choose your rival
-          </label>
-
-          <select
-            className="form__select"
-            id="rivalSelect"
-            name="rivalOptions"
-            onChange={(event) => setCurrentRivalId(event.target.value)}
-          >
-            <option value="">-- Choose a rival --</option>
-            {profileData.rivals.map((rival) => {
-              return (
-                <option key={rival.id} value={rival.id}>
-                  {rival.nickname}
-                </option>
-              );
-            })}
-          </select>
+          <SelectCurrentRival
+            rivals={profileData.rivals}
+            setCurrentRivalId={setCurrentRivalId}
+          />
         </>
       );
     } else {
