@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AddFightButton } from "./components/AddFight";
 import { FightResult } from "./components/FightResult";
 import { TopBar } from "./components/Topbar";
 import "./styles.css";
-import { HistoryEntry } from "./types";
+import { HistoryEntry, Rival } from "./types";
 import { Modal } from "./components/Modal";
 import { NewFightForm } from "./components/NewFightForm";
 import { AppContext } from "./context";
 import { NoRivalsGuide } from "./components/NoRivalsGuide";
+import { currentDate } from "./utils";
+import { SelectCurrentRival } from "./components/SelectCurrentRival";
 
 function App() {
   const context = useContext(AppContext);
@@ -15,28 +17,80 @@ function App() {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const {
-    profileData,
-    charactersData,
-    victoryCounter,
-    defeatCounter,
-    currentDayFights,
-  } = context;
+  const { profileData, charactersData, historyEntries } = context;
+
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [currentRivalFights, setCurrentRivalFights] = useState<HistoryEntry[]>(
+    [],
+  );
+  const [victoryCounter, setVictoryCounter] = useState<number>(0);
+  const [defeatCounter, setDefeatCounter] = useState<number>(0);
+  const [currentRivalId, setCurrentRivalId] = useState<Rival["id"]>("");
+
   let isRivalData: boolean = false;
+
+  function countVictoriesAndDefeats(history: HistoryEntry[] | undefined) {
+    let victories: number = 0;
+    let defeats: number = 0;
+    if (!history) {
+      // Because in this case there aren't any fights to count
+      // So I reset the counters to default values
+      setVictoryCounter(victories);
+      setDefeatCounter(defeats);
+      return;
+    }
+
+    history.forEach((fight) => {
+      if (fight.win) {
+        victories++;
+      } else {
+        defeats++;
+      }
+    });
+    setVictoryCounter(victories);
+    setDefeatCounter(defeats);
+  }
+
+  useEffect(() => {
+    if (!historyEntries[currentDate]) {
+      // Because in this case there are no existing fights for the currentDate
+      return;
+    }
+    if (historyEntries[currentDate].length > 0) {
+      const filteredFights = historyEntries[currentDate].filter(
+        (fight) => fight.rivalId === currentRivalId,
+      );
+      setCurrentRivalFights(filteredFights);
+      countVictoriesAndDefeats(filteredFights);
+    }
+  }, [historyEntries, currentRivalId]);
 
   function renderHeader() {
     if (profileData && profileData.rivals.length > 0) {
       isRivalData = true;
+
+      const rivalData = profileData.rivals.find(
+        (rival) => rival.id === currentRivalId,
+      );
+
       return (
-        <TopBar
-          playerName={profileData.nickname}
-          playerImage={profileData.image}
-          rivalName={profileData.rivals[0].nickname}
-          rivalImage={profileData.rivals[0].image}
-          victoryCounter={victoryCounter}
-          defeatCounter={defeatCounter}
-        />
+        <>
+          {rivalData && (
+            <TopBar
+              playerName={profileData.nickname}
+              playerImage={profileData.image}
+              rivalName={rivalData.nickname}
+              rivalImage={rivalData.image}
+              victoryCounter={victoryCounter}
+              defeatCounter={defeatCounter}
+            />
+          )}
+
+          <SelectCurrentRival
+            rivals={profileData.rivals}
+            setCurrentRivalId={setCurrentRivalId}
+          />
+        </>
       );
     } else {
       return <NoRivalsGuide />;
@@ -47,7 +101,7 @@ function App() {
     <>
       {renderHeader()}
       <section className="currentDayFights">
-        {currentDayFights
+        {currentRivalFights
           ?.map((fight: HistoryEntry, index) => {
             const character1Data = charactersData.find(
               (character) => character.name === fight.character1,

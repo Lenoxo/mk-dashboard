@@ -14,13 +14,8 @@ export function NewFightForm({ setOpenModal }: Props) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const {
-    profileData,
-    charactersData,
-    historyEntries,
-    setHistoryEntries,
-    setCurrentDayFights,
-  } = context;
+  const { profileData, charactersData, historyEntries, setHistoryEntries } =
+    context;
 
   const rivalRef = useRef<HTMLSelectElement>(null);
   const character1Ref = useRef<HTMLSelectElement>(null);
@@ -75,7 +70,6 @@ because you should only render NewFightForm when there is profileData`);
       updatedHistory[currentDate].push(newFight);
     }
     setHistoryEntries(updatedHistory);
-    setCurrentDayFights(updatedHistory[currentDate]);
 
     setOpenModal(false);
   }

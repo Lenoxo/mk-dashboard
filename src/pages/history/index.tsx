@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { AppContext } from "../../context";
 import { HistoryEntry, ProfileData, Rival } from "../../types";
 import "./styles.css";
-import { currentDate } from "../../utils";
 
 export function HistoryPage() {
   const context = useContext(AppContext);
@@ -10,15 +9,7 @@ export function HistoryPage() {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const {
-    setCurrentDayFights,
-    profileData,
-    historyEntries,
-    setHistoryEntries,
-    countVictoriesAndDefeats,
-  } = context;
-
-  // TODO: Optimize the history render and delete if possible
+  const { profileData, historyEntries, setHistoryEntries } = context;
 
   function handleFightDelete(fight: HistoryEntry, fightIndex: number) {
     const updatedEntries = { ...historyEntries };
@@ -29,11 +20,6 @@ export function HistoryPage() {
     }
 
     setHistoryEntries(updatedEntries);
-
-    if (fight.date === currentDate) {
-      setCurrentDayFights(updatedEntries[currentDate]);
-      countVictoriesAndDefeats(updatedEntries[currentDate]);
-    }
   }
   return (
     <section className="container">
