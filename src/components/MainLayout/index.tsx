@@ -1,15 +1,24 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import { Navbar } from "../Navbar";
 import "./styles.css";
+import { AppContext } from "../../context";
+import { Loading } from "../LoadingComponent";
 
 export function MainLayout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("AppContext should be used inside an AppProvider");
+  }
+
+  const { loading } = context;
   return (
     <>
       <Navbar open={isMenuOpen} setOpen={setIsMenuOpen} />
       <div className={`appWrapper ${isMenuOpen && "appWrapper--move"}`}>
         <Header open={isMenuOpen} setOpen={setIsMenuOpen} />
-        {children}
+        {loading && <Loading />}
+        {!loading && children}
       </div>
     </>
   );
