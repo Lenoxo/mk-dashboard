@@ -115,7 +115,7 @@ function AppProvider({ children }: { children: ReactNode }) {
   // When historyEntries are updated, saving it's value to localStorage
 
   useEffect(() => {
-    if (!historyEntries) {
+    if (Object.keys(historyEntries).length === 0) {
       // Because in this case is a new user that is working with the app
       return;
     }
