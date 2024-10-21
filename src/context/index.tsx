@@ -10,6 +10,7 @@ interface AppContextType {
   setCharactersData: React.Dispatch<React.SetStateAction<CharacterData[]>>;
   historyEntries: HistoryEntries;
   setHistoryEntries: React.Dispatch<React.SetStateAction<HistoryEntries>>;
+  loading: boolean;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -73,6 +74,8 @@ function AppProvider({ children }: { children: ReactNode }) {
     { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
   ]);
 
+  const [loading, setLoading] = useState<boolean>(true);
+
   // Read the localStorage data and set HistoryEntries and ProfileData if it exists
 
   useEffect(() => {
@@ -91,11 +94,13 @@ function AppProvider({ children }: { children: ReactNode }) {
       const result = await asyncLocalStorage.getItem("profile");
       if (!result) {
         console.info("There is no prior data in localStorage for profile key");
+        setLoading(false);
         return;
       }
 
       const parsedResult = (await JSON.parse(result)) as ProfileData;
       setProfileData(parsedResult);
+      setLoading(false);
     }
 
     readProfileData();
@@ -131,6 +136,7 @@ function AppProvider({ children }: { children: ReactNode }) {
         setCharactersData,
         historyEntries,
         setHistoryEntries,
+        loading,
       }}
     >
       {children}
