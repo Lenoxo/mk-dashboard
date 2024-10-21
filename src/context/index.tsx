@@ -1,6 +1,7 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { ReactNode, useState } from "react";
 import { ProfileData, CharacterData, HistoryEntries } from "../types";
+import { asyncLocalStorage } from "../utils";
 
 interface AppContextType {
   profileData: ProfileData | null;
@@ -71,6 +72,55 @@ function AppProvider({ children }: { children: ReactNode }) {
     { name: "Scorpion", imageUrl: "https://imgur.com/609Ay70.png" },
     { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
   ]);
+
+  // Read the localStorage data and set HistoryEntries and ProfileData if it exists
+
+  useEffect(() => {
+    async function readHistoryEntries() {
+      const result = await asyncLocalStorage.getItem("history");
+      if (!result) {
+        console.info("There is no prior data in localStorage for history key");
+        return;
+      }
+
+      const parsedResult = (await JSON.parse(result)) as HistoryEntries;
+      setHistoryEntries(parsedResult);
+    }
+
+    async function readProfileData() {
+      const result = await asyncLocalStorage.getItem("profile");
+      if (!result) {
+        console.info("There is no prior data in localStorage for profile key");
+        return;
+      }
+
+      const parsedResult = (await JSON.parse(result)) as ProfileData;
+      setProfileData(parsedResult);
+    }
+
+    readProfileData();
+    readHistoryEntries();
+  }, []);
+
+  // When profileData is updated, saving it's value to localStorage
+
+  useEffect(() => {
+    if (!profileData) {
+      // Because in this case is a new user that is working with the app
+      return;
+    }
+    asyncLocalStorage.setItem("profile", profileData);
+  }, [profileData]);
+
+  // When historyEntries are updated, saving it's value to localStorage
+
+  useEffect(() => {
+    if (Object.keys(historyEntries).length === 0) {
+      // Because in this case is a new user that is working with the app
+      return;
+    }
+    asyncLocalStorage.setItem("history", historyEntries);
+  }, [historyEntries]);
 
   return (
     <AppContext.Provider
