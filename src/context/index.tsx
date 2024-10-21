@@ -73,6 +73,8 @@ function AppProvider({ children }: { children: ReactNode }) {
     { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
   ]);
 
+  // Read the localStorage data and set HistoryEntries and ProfileData if it exists
+
   useEffect(() => {
     async function readHistoryEntries() {
       const result = await asyncLocalStorage.getItem("history");
@@ -99,6 +101,26 @@ function AppProvider({ children }: { children: ReactNode }) {
     readProfileData();
     readHistoryEntries();
   }, []);
+
+  // When profileData is updated, saving it's value to localStorage
+
+  useEffect(() => {
+    if (!profileData) {
+      // Because in this case is a new user that is working with the app
+      return;
+    }
+    asyncLocalStorage.setItem("profile", profileData);
+  }, [profileData]);
+
+  // When historyEntries are updated, saving it's value to localStorage
+
+  useEffect(() => {
+    if (!historyEntries) {
+      // Because in this case is a new user that is working with the app
+      return;
+    }
+    asyncLocalStorage.setItem("history", historyEntries);
+  }, [historyEntries]);
 
   return (
     <AppContext.Provider
