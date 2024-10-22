@@ -20,9 +20,7 @@ export function Home() {
   const { profileData, charactersData, historyEntries } = context;
 
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [currentRivalFights, setCurrentRivalFights] = useState<HistoryEntry[]>(
-    [],
-  );
+  const [currentRivalFights, setCurrentRivalFights] = useState<HistoryEntry[]>([]);
   const [victoryCounter, setVictoryCounter] = useState<number>(0);
   const [defeatCounter, setDefeatCounter] = useState<number>(0);
   const [currentRivalId, setCurrentRivalId] = useState<Rival["id"]>("");
@@ -58,7 +56,7 @@ export function Home() {
     }
     if (historyEntries[currentDate].length > 0) {
       const filteredFights = historyEntries[currentDate].filter(
-        (fight) => fight.rivalId === currentRivalId,
+        (fight) => fight.rivalId === currentRivalId
       );
       setCurrentRivalFights(filteredFights);
       countVictoriesAndDefeats(filteredFights);
@@ -69,9 +67,7 @@ export function Home() {
     if (profileData && profileData.rivals.length > 0) {
       isRivalData = true;
 
-      const rivalData = profileData.rivals.find(
-        (rival) => rival.id === currentRivalId,
-      );
+      const rivalData = profileData.rivals.find((rival) => rival.id === currentRivalId);
 
       return (
         <>
@@ -86,10 +82,7 @@ export function Home() {
             />
           )}
 
-          <SelectCurrentRival
-            rivals={profileData.rivals}
-            setCurrentRivalId={setCurrentRivalId}
-          />
+          <SelectCurrentRival rivals={profileData.rivals} setCurrentRivalId={setCurrentRivalId} />
         </>
       );
     } else {
@@ -104,23 +97,21 @@ export function Home() {
         {currentRivalFights
           ?.map((fight: HistoryEntry, index) => {
             const character1Data = charactersData.find(
-              (character) => character.name === fight.character1,
+              (character) => character.name === fight.character1
             );
             const character2Data = charactersData.find(
-              (character) => character.name === fight.character2,
+              (character) => character.name === fight.character2
             );
 
             if (!character1Data) {
               throw new Error(
-                "The character name in history does not exists in charactersData " +
-                  character1Data,
+                "The character name in history does not exists in charactersData " + character1Data
               );
             }
 
             if (!character2Data) {
               throw new Error(
-                "The character name in history does not exists in charactersData " +
-                  character2Data,
+                "The character name in history does not exists in charactersData " + character2Data
               );
             }
 

@@ -71,7 +71,7 @@ function AppProvider({ children }: { children: ReactNode }) {
   // });
   const [charactersData, setCharactersData] = useState<CharacterData[]>([
     { name: "Scorpion", imageUrl: "https://imgur.com/609Ay70.png" },
-    { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
+    { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" }
   ]);
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -136,7 +136,7 @@ function AppProvider({ children }: { children: ReactNode }) {
         setCharactersData,
         historyEntries,
         setHistoryEntries,
-        loading,
+        loading
       }}
     >
       {children}
