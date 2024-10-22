@@ -1,4 +1,4 @@
-import App from "../App";
+import { Home } from "./home";
 import { useRoutes } from "react-router-dom";
 import { ProfilePage } from "./profile";
 import { UpdateProfileForm } from "../components/UpdateProfileForm";
@@ -10,25 +10,25 @@ export function AppRoutes() {
     {
       // TODO: Añadir una página de error personalizada con la propiedad de errorPage.
       path: "/",
-      element: <App />,
+      element: <Home />
     },
     {
       path: "/profile",
-      element: <ProfilePage />,
+      element: <ProfilePage />
     },
     {
       path: "/profile/update",
-      element: <UpdateProfileForm />,
+      element: <UpdateProfileForm />
     },
     {
       path: "/profile/rivals/:id",
       // I left null because I'm not using this form inside a Modal
-      element: <RivalForm setOpenModal={null} />,
+      element: <RivalForm setOpenModal={null} />
     },
     {
       path: "/history",
-      element: <HistoryPage />,
-    },
+      element: <HistoryPage />
+    }
   ]);
   return routes;
 }

@@ -37,13 +37,11 @@ export function HistoryPage() {
                     return;
                   }
                   // Search the rival info by their rivalId
-                  const rivalData = profileData.rivals.find(
-                    (rival) => rival.id === entry.rivalId,
-                  );
+                  const rivalData = profileData.rivals.find((rival) => rival.id === entry.rivalId);
 
                   if (!rivalData) {
                     throw new Error(
-                      "rivalData is undefined, so the entry.rivalId is pointing to a non existing rival",
+                      "rivalData is undefined, so the entry.rivalId is pointing to a non existing rival"
                     );
                   }
                   return (
@@ -73,13 +71,7 @@ interface FightResumeProps {
   deleteFight(arg0: HistoryEntry, arg1: number): void;
 }
 
-function FightResume({
-  index,
-  profileData,
-  fight,
-  rivalData,
-  deleteFight,
-}: FightResumeProps) {
+function FightResume({ index, profileData, fight, rivalData, deleteFight }: FightResumeProps) {
   return (
     <li className="fightItem">
       <div className="fightItem__thumbnailsContainer">
@@ -89,13 +81,8 @@ function FightResume({
           <p className="fightItem__character1Text">{fight.character1}</p>
         </div>
         <div className="resultContainer">
-          <p className="resultContainer__result">
-            {fight.win ? "WIN" : "LOSE"}
-          </p>
-          <button
-            className="deleteFight"
-            onClick={() => deleteFight(fight, index)}
-          >
+          <p className="resultContainer__result">{fight.win ? "WIN" : "LOSE"}</p>
+          <button className="deleteFight" onClick={() => deleteFight(fight, index)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

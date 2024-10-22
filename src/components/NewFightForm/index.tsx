@@ -14,8 +14,7 @@ export function NewFightForm({ setOpenModal }: Props) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
 
-  const { profileData, charactersData, historyEntries, setHistoryEntries } =
-    context;
+  const { profileData, charactersData, historyEntries, setHistoryEntries } = context;
 
   const rivalRef = useRef<HTMLSelectElement>(null);
   const character1Ref = useRef<HTMLSelectElement>(null);
@@ -60,7 +59,7 @@ because you should only render NewFightForm when there is profileData`);
       rivalId: rivalRef.current?.value || "",
       character2: selectedCharacter2?.name || "",
       character1: selectedCharacter1?.name || "",
-      win: winRef.current?.checked ? true : false,
+      win: winRef.current?.checked ? true : false
     };
 
     const updatedHistory = { ...historyEntries };
@@ -79,19 +78,10 @@ because you should only render NewFightForm when there is profileData`);
       <label className="form__label" htmlFor="rivalSelect">
         Choose your rival
       </label>
-      <select
-        className="form__select"
-        id="rivalSelect"
-        name="rivalOptions"
-        ref={rivalRef}
-      >
+      <select className="form__select" id="rivalSelect" name="rivalOptions" ref={rivalRef}>
         {rivalsList.map((rival, index) => {
           return (
-            <option
-              key={index}
-              className="form__select__option"
-              value={rival.id}
-            >
+            <option key={index} className="form__select__option" value={rival.id}>
               {rival.nickname}
             </option>
           );
@@ -115,20 +105,13 @@ because you should only render NewFightForm when there is profileData`);
 
         {charactersData.map((character1, index) => {
           return (
-            <option
-              key={index}
-              className="form__select__option"
-              value={character1.name}
-            >
+            <option key={index} className="form__select__option" value={character1.name}>
               {character1.name}
             </option>
           );
         })}
       </select>
-      <img
-        className="form__character1Image"
-        src={selectedCharacter1?.imageUrl}
-      />
+      <img className="form__character1Image" src={selectedCharacter1?.imageUrl} />
 
       <label className="form__label" htmlFor="character2Select">
         Choose your rival's character
@@ -147,31 +130,19 @@ because you should only render NewFightForm when there is profileData`);
 
         {charactersData.map((character2, index) => {
           return (
-            <option
-              key={index}
-              className="form__select__option"
-              value={character2.name}
-            >
+            <option key={index} className="form__select__option" value={character2.name}>
               {character2.name}
             </option>
           );
         })}
       </select>
-      <img
-        className="form__character2Image"
-        src={selectedCharacter2?.imageUrl}
-      />
+      <img className="form__character2Image" src={selectedCharacter2?.imageUrl} />
 
       {/* This is an implicit label, I read about them in MDN docs */}
 
       <label className="form__label">
         Did you win?
-        <input
-          className="form__checkbox"
-          ref={winRef}
-          type="checkbox"
-          name="win"
-        />
+        <input className="form__checkbox" ref={winRef} type="checkbox" name="win" />
       </label>
 
       <button className="form__button form__button--submit" type="submit">

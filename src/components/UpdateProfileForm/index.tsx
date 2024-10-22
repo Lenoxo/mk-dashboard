@@ -24,9 +24,7 @@ export function UpdateProfileForm() {
 
   function handleImageChange() {
     if (imageRef.current === null) {
-      throw new Error(
-        "imageRef.current is null, check your usage for the component",
-      );
+      throw new Error("imageRef.current is null, check your usage for the component");
     }
 
     setImageValue(imageRef.current.value);
@@ -40,28 +38,24 @@ export function UpdateProfileForm() {
     event.preventDefault();
 
     if (nicknameRef.current === null) {
-      throw new Error(
-        "nicknameRef.current is null, check your usage for the component",
-      );
+      throw new Error("nicknameRef.current is null, check your usage for the component");
     }
 
     if (imageRef.current === null) {
-      throw new Error(
-        "imageRef.current is null, check your usage for the component",
-      );
+      throw new Error("imageRef.current is null, check your usage for the component");
     }
 
     if (!profileData) {
       setProfileData({
         nickname: nicknameRef.current.value,
         image: imageRef.current.value,
-        rivals: [],
+        rivals: []
       });
     } else {
       setProfileData({
         ...profileData,
         nickname: nicknameRef.current.value,
-        image: imageRef.current.value,
+        image: imageRef.current.value
       });
     }
 
@@ -104,11 +98,7 @@ export function UpdateProfileForm() {
         Save
       </button>
 
-      <button
-        className="form__button form__button--cancel"
-        type="button"
-        onClick={handleCancel}
-      >
+      <button className="form__button form__button--cancel" type="button" onClick={handleCancel}>
         Cancel
       </button>
     </form>

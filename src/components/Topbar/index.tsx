@@ -15,7 +15,7 @@ export function TopBar({
   rivalName,
   rivalImage,
   victoryCounter,
-  defeatCounter,
+  defeatCounter
 }: Props) {
   return (
     <div className="topbar">

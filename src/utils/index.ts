@@ -14,7 +14,7 @@ const asyncLocalStorage = {
       const item = localStorage.getItem(key);
       resolve(item);
     });
-  },
+  }
 };
 
 export { currentDate, asyncLocalStorage };

@@ -26,40 +26,41 @@ export function RivalForm({ setOpenModal }: Props) {
 
   const { id } = useParams();
 
+  if (!profileData) {
+    throw new Error("profileData is null, you should not render this component when this happens");
+  }
+
   useEffect(() => {
     if (!id) {
       // Because in this case, the user is using the form in /profile
       // No in /profile/rivals/:id
       return;
-    } else {
-      if (typeof id !== "string") {
-        throw new Error("The current rival id in the url does not exist");
-      }
+    }
+    if (typeof id !== "string") {
+      throw new Error("The current rival id in the url does not exist");
+    }
 
-      let tempIndex = 0;
+    let tempIndex = 0;
 
-      for (let i = 0; i < profileData.rivals.length; i++) {
-        if (profileData.rivals[i].id !== id) {
-          continue;
-        }
-        tempIndex = i;
-        setRivalIndex(i);
-        break;
+    for (let i = 0; i < profileData.rivals.length; i++) {
+      if (profileData.rivals[i].id !== id) {
+        continue;
       }
+      tempIndex = i;
+      setRivalIndex(i);
+      break;
+    }
 
-      if (profileData.rivals[tempIndex]) {
-        setRivalData(profileData.rivals[tempIndex]);
-        setImageValue(profileData.rivals[tempIndex].image);
-        return;
-      }
+    if (profileData.rivals[tempIndex]) {
+      setRivalData(profileData.rivals[tempIndex]);
+      setImageValue(profileData.rivals[tempIndex].image);
+      return;
     }
   }, [id, profileData.rivals]);
 
   function handleImageChange() {
     if (imageRef.current === null) {
-      throw new Error(
-        "imageRef.current is null, check your usage for the component",
-      );
+      throw new Error("imageRef.current is null, check your usage for the component");
     }
 
     setImageValue(imageRef.current.value);
@@ -74,12 +75,16 @@ export function RivalForm({ setOpenModal }: Props) {
   }
 
   function addNewRival(newRivalData: Rival) {
+    if (!profileData) {
+      throw new Error("profileData is null");
+    }
+
     const updatedRivals = [...profileData.rivals];
     updatedRivals.push(newRivalData);
 
     setProfileData({
       ...profileData,
-      rivals: updatedRivals,
+      rivals: updatedRivals
     });
 
     if (setOpenModal) {
@@ -88,12 +93,16 @@ export function RivalForm({ setOpenModal }: Props) {
   }
 
   function updateRivalData(updatedRivalData: Rival) {
+    if (!profileData) {
+      throw new Error("profileData is null");
+    }
+
     const updatedRivals = [...profileData.rivals];
     updatedRivals[rivalIndex] = updatedRivalData;
 
     setProfileData({
       ...profileData,
-      rivals: updatedRivals,
+      rivals: updatedRivals
     });
 
     navigate("/profile");
@@ -103,21 +112,17 @@ export function RivalForm({ setOpenModal }: Props) {
     event.preventDefault();
 
     if (nicknameRef.current === null) {
-      throw new Error(
-        "nicknameRef.current is null, check your usage for the component",
-      );
+      throw new Error("nicknameRef.current is null, check your usage for the component");
     }
 
     if (imageRef.current === null) {
-      throw new Error(
-        "imageRef.current is null, check your usage for the component",
-      );
+      throw new Error("imageRef.current is null, check your usage for the component");
     }
 
     const newRivalData: Rival = {
       id: rivalData?.id || uuidv4(),
       nickname: nicknameRef.current.value,
-      image: imageRef.current.value,
+      image: imageRef.current.value
     };
 
     if (rivalData) {
@@ -163,11 +168,7 @@ export function RivalForm({ setOpenModal }: Props) {
         Save
       </button>
 
-      <button
-        className="form__button form__button--cancel"
-        type="button"
-        onClick={handleCancel}
-      >
+      <button className="form__button form__button--cancel" type="button" onClick={handleCancel}>
         Cancel
       </button>
     </form>

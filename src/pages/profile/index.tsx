@@ -14,8 +14,7 @@ export function ProfilePage() {
   if (!context) {
     throw new Error("AppContext should be used inside an AppProvider");
   }
-  const { profileData, historyEntries, setProfileData, setHistoryEntries } =
-    context;
+  const { profileData, historyEntries, setProfileData, setHistoryEntries } = context;
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -45,7 +44,7 @@ export function ProfilePage() {
 
     setProfileData({
       ...profileData,
-      rivals,
+      rivals
     });
   }
 
