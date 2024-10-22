@@ -5,7 +5,7 @@ body {
   /* TODO: Add box-sizing: border-box to the whole app (using * selector), and CSS variables*/
 }
 
-main {
+.currentRivalFights {
   display: grid;
   grid-template-columns: 1;
   gap: 2rem;

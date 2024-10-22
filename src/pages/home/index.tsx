@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { AddFightButton } from "./components/AddFight";
-import { FightResult } from "./components/FightResult";
-import { TopBar } from "./components/Topbar";
+import { AddFightButton } from "../../components/AddFight";
+import { FightResult } from "../../components/FightResult";
+import { TopBar } from "../../components/Topbar";
 import "./styles.css";
-import { HistoryEntry, Rival } from "./types";
-import { Modal } from "./components/Modal";
-import { NewFightForm } from "./components/NewFightForm";
-import { AppContext } from "./context";
-import { NoRivalsGuide } from "./components/NoRivalsGuide";
-import { currentDate } from "./utils";
-import { SelectCurrentRival } from "./components/SelectCurrentRival";
+import { HistoryEntry, Rival } from "../../types";
+import { Modal } from "../../components/Modal";
+import { NewFightForm } from "../../components/NewFightForm";
+import { AppContext } from "../../context";
+import { NoRivalsGuide } from "../../components/NoRivalsGuide";
+import { currentDate } from "../../utils";
+import { SelectCurrentRival } from "../../components/SelectCurrentRival";
 
-function App() {
+export function Home() {
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("AppContext should be used inside an AppProvider");
@@ -100,7 +100,7 @@ function App() {
   return (
     <>
       {renderHeader()}
-      <section className="currentDayFights">
+      <section className="currentRivalFights">
         {currentRivalFights
           ?.map((fight: HistoryEntry, index) => {
             const character1Data = charactersData.find(
@@ -145,5 +145,3 @@ function App() {
     </>
   );
 }
-
-export default App;

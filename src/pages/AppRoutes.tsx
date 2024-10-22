@@ -1,4 +1,4 @@
-import App from "../App";
+import { Home } from "./home";
 import { useRoutes } from "react-router-dom";
 import { ProfilePage } from "./profile";
 import { UpdateProfileForm } from "../components/UpdateProfileForm";
@@ -10,7 +10,7 @@ export function AppRoutes() {
     {
       // TODO: Añadir una página de error personalizada con la propiedad de errorPage.
       path: "/",
-      element: <App />,
+      element: <Home />,
     },
     {
       path: "/profile",
