@@ -71,7 +71,35 @@ function AppProvider({ children }: { children: ReactNode }) {
   // });
   const [charactersData, setCharactersData] = useState<CharacterData[]>([
     { name: "Scorpion", imageUrl: "https://imgur.com/609Ay70.png" },
-    { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" }
+    { name: "Subzero", imageUrl: "https://imgur.com/i6pgo8i.png" },
+    { name: "Liu Kang", imageUrl: "https://imgur.com/vRKWRgy.png" },
+    { name: "Kung Lao", imageUrl: "https://imgur.com/LZYdQ6p.png" },
+    { name: "Raiden", imageUrl: "https://imgur.com/HDvvkhK.png" },
+    { name: "Johnny Cage", imageUrl: "https://imgur.com/tJDr45Z.png" },
+    { name: "Sonya Blade", imageUrl: "https://imgur.com/HuVve4A.png" },
+    { name: "Jax", imageUrl: "https://imgur.com/eh4vWsS.png" },
+    { name: "Kitana", imageUrl: "https://imgur.com/iT4zPZt.png" },
+    { name: "Mileena", imageUrl: "https://imgur.com/oJ5riVr.png" },
+    { name: "Jade", imageUrl: "https://imgur.com/sxrHKC8.png" },
+    { name: "Nightwolf", imageUrl: "https://imgur.com/ei048Q7.png" },
+    { name: "Smoke", imageUrl: "https://imgur.com/JYV7dwd.png" },
+    { name: "Sektor", imageUrl: "https://imgur.com/oTiwmBR.png" },
+    { name: "Cyrax", imageUrl: "https://imgur.com/XGhPd3u.png" },
+    { name: "Kabal", imageUrl: "https://imgur.com/ham0PG5.png" },
+    { name: "Sindel", imageUrl: "https://imgur.com/OW0T8qY.png" },
+    { name: "Stryker", imageUrl: "https://imgur.com/ZgEAv91.png" },
+    { name: "Shang Tsung", imageUrl: "https://imgur.com/FLmsq55.png" },
+    { name: "Baraka", imageUrl: "https://imgur.com/E6hTpP6.png" },
+    { name: "Reptile", imageUrl: "https://imgur.com/U4iRcLU.png" },
+    { name: "Ermac", imageUrl: "https://imgur.com/6xSRc0D.png" },
+    { name: "Noob Saibot", imageUrl: "https://imgur.com/OpCoTb9.png" },
+    { name: "Quan Chi", imageUrl: "https://imgur.com/eUOvQc2.png" },
+    { name: "Sheeva", imageUrl: "https://imgur.com/Ftn4MuN.png" },
+    { name: "Kano", imageUrl: "https://imgur.com/l1NPTCX.png" },
+    { name: "Rain", imageUrl: "https://imgur.com/9q7MkaN.png" },
+    { name: "Kenshi", imageUrl: "https://imgur.com/LfCtxYI.png" },
+    { name: "Skarlet", imageUrl: "https://imgur.com/XmvPYxY.png" },
+    { name: "Freddy Krueger", imageUrl: "https://imgur.com/g2xqj8M.png" }
   ]);
 
   const [loading, setLoading] = useState<boolean>(true);
