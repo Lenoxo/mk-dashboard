@@ -148,12 +148,12 @@ function AppProvider({ children }: { children: ReactNode }) {
   // When historyEntries are updated, saving it's value to localStorage
 
   useEffect(() => {
-    if (Object.keys(historyEntries).length === 0) {
-      // Because in this case is a new user that is working with the app
+    if (loading) {
+      // To prevent an error that overwrites the historyEntries in localStorage with the initial value of the state with an empty object
       return;
     }
     asyncLocalStorage.setItem("history", historyEntries);
-  }, [historyEntries]);
+  }, [historyEntries, loading]);
 
   return (
     <AppContext.Provider
