@@ -13,7 +13,26 @@ body {
 
 .currentRivalFights {
   display: grid;
-  grid-template-columns: 1;
-  gap: 2rem;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 10px;
   margin: 2rem 0 2rem 0;
+}
+
+@media (min-width: 500px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 800px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

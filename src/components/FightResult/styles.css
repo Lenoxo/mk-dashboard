@@ -7,8 +7,10 @@
 
 .fightResult__character1Image,
 .fightResult__character2Image {
-  width: 40%;
+  width: auto;
+  max-width: 48%;
   height: 100%;
+  border-radius: 1rem;
   object-fit: contain;
   position: absolute;
   top: 0;
@@ -39,7 +41,7 @@
   left: 0;
   backdrop-filter: blur(20px);
   background-color: rgba(91, 153, 194, 0.2);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .fightBanner__vs-text {
@@ -49,4 +51,27 @@
 .fightBanner--defeat {
   border-color: red;
   background-color: rgba(255, 0, 0, 0.2);
+}
+
+@media (min-width: 500px) {
+  .fightResult {
+    width: 45vw;
+    height: 30vh;
+  }
+
+  .fightBanner {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .fightResult {
+    width: 30vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .fightResult {
+    width: 22vw;
+  }
 }
