@@ -9,6 +9,7 @@
   border-radius: 1rem;
   padding: 1rem 0 1rem 0;
   font-size: 1.2rem;
+  text-align: center;
 }
 
 .form__label {
@@ -18,7 +19,7 @@
 .form__select,
 .form__button {
   background-color: #2f2f2f;
-  width: 45%;
+  width: 11rem;
   text-align: center;
   color: white;
   font-size: 1rem;
