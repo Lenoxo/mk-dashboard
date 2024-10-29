@@ -7,8 +7,10 @@
 
 .fightResult__character1Image,
 .fightResult__character2Image {
-  width: 40%;
+  width: auto;
+  max-width: 48%;
   height: 100%;
+  border-radius: 1rem;
   object-fit: contain;
   position: absolute;
   top: 0;
@@ -27,23 +29,19 @@
   width: 100%;
   min-height: 20%;
   padding: 0 1rem 0 1rem;
-  border: 2px solid #5b99c2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  border-radius: 1rem;
-  font-size: 1.5rem;
-  backdrop-filter: blur(20px);
-  background-color: rgba(91, 153, 194, 0.2);
-  box-sizing: border-box;
   display: grid;
+  gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
   text-align: center;
+  border: 2px solid #5b99c2;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(20px);
+  background-color: rgba(91, 153, 194, 0.2);
+  font-size: 1.2rem;
 }
 
 .fightBanner__vs-text {
@@ -53,4 +51,27 @@
 .fightBanner--defeat {
   border-color: red;
   background-color: rgba(255, 0, 0, 0.2);
+}
+
+@media (min-width: 500px) {
+  .fightResult {
+    width: 45vw;
+    height: 30vh;
+  }
+
+  .fightBanner {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .fightResult {
+    width: 30vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .fightResult {
+    width: 22vw;
+  }
 }

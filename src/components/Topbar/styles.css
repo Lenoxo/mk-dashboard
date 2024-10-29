@@ -1,14 +1,18 @@
 .topbar {
   width: 100vw;
-  height: 8rem;
+  height: 20vh;
   background-color: #1a1b26;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  place-items: center;
+  text-align: center;
+  padding: 0 1rem 0 1rem;
 }
 
 .playerThumbnail {
   max-width: 20vw;
+  display: grid;
+  place-items: center;
 }
 
 .playerThumbnail__nickname {
@@ -25,18 +29,15 @@
 }
 
 .topbar__vs-text {
-  margin: 0 2rem 0 2rem;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .topbar__resultCounter1 {
   color: #5b99c2;
-  margin-left: 1rem;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .topbar__resultCounter2 {
   color: red;
-  margin-right: 1rem;
-  font-size: 4rem;
+  font-size: 3rem;
 }

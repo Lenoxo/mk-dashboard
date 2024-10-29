@@ -1,7 +1,8 @@
 .navbar {
   position: fixed;
   /*right: 0;*/
-  width: 60vw;
+  width: 70vw;
+  right: -70vw;
   height: 100vh;
   background-color: #1d1e20;
   /*background-color: #040d12;*/
@@ -12,22 +13,21 @@
   z-index: 1;
   top: 0px;
   left: auto;
-  right: -60vw;
   /*transform: translate(-300px);*/
   transform: translate(0vw);
   transition-duration: 300ms;
   backface-visibility: hidden;
-  box-sizing: border-box;
 }
 
 .navbar--show {
-  transform: translate(-60vw);
+  transform: translate(-70vw);
 }
 
 .navbar__link,
 .navbar__button {
   width: auto;
-  height: 2rem;
+  height: 4.7rem;
+  justify-content: start;
   text-decoration: none;
   color: #d7eae3;
   background-color: inherit;
@@ -38,7 +38,6 @@
   font-weight: bolder;
   margin-bottom: 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border: none;
 }
@@ -53,7 +52,7 @@
 }
 
 .navbar__link__text {
-  width: 80%;
+  padding-left: 1rem;
 }
 
 .navbar__link__icon {

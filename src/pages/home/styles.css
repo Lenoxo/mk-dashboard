@@ -1,13 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   color: white;
   background-color: #1b1b1b;
-  /* TODO: Add box-sizing: border-box to the whole app (using * selector), and CSS variables*/
+  width: 100vw;
+  height: 100vh;
+  /* TODO: Add CSS variables*/
 }
 
 .currentRivalFights {
   display: grid;
-  grid-template-columns: 1;
-  gap: 2rem;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 10px;
   margin: 2rem 0 2rem 0;
+}
+
+@media (min-width: 500px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form,
+  .currentRival__select {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 800px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .currentRivalFights {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

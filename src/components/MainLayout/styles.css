@@ -2,11 +2,10 @@
   transform: translate(0vw);
   transition-duration: 300ms;
   backface-visibility: hidden;
-  box-sizing: border-box;
 }
 
 .appWrapper--move {
-  transform: translate(-60vw);
+  transform: translate(-70vw);
 }
 
 .header {
@@ -22,13 +21,12 @@
   align-items: center;
   font-weight: bold;
   padding: 0.5rem 1rem 0.5rem 1rem;
-  box-sizing: border-box;
   border-bottom: 2px solid #2a2c2f;
 }
 
 .header__button {
-  width: 15%;
-  height: 90%;
+  width: 4rem;
+  height: 85%;
   background-color: inherit;
   border: 1px solid white;
   border-radius: 1rem;
@@ -36,13 +34,11 @@
   transition:
     opacity 300ms ease,
     border-color 300ms ease; /* Añadido */
-  opacity: 1; /* Estado visible */
 }
 
 .header__button--disabled {
   border: 1px solid transparent;
   color: transparent;
-  opacity: 0.5; /* Estado deshabilitado con menor opacidad */
   pointer-events: none; /* Evitar interacción cuando está deshabilitado */
 }
 
