@@ -5,7 +5,7 @@
 }
 
 .appWrapper--move {
-  transform: translate(-60vw);
+  transform: translate(-70vw);
 }
 
 .header {
@@ -34,13 +34,11 @@
   transition:
     opacity 300ms ease,
     border-color 300ms ease; /* Añadido */
-  opacity: 1; /* Estado visible */
 }
 
 .header__button--disabled {
   border: 1px solid transparent;
   color: transparent;
-  opacity: 0.5; /* Estado deshabilitado con menor opacidad */
   pointer-events: none; /* Evitar interacción cuando está deshabilitado */
 }
 
