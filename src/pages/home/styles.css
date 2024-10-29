@@ -23,6 +23,10 @@ body {
   .currentRivalFights {
     grid-template-columns: 1fr 1fr;
   }
+  .form,
+  .currentRival__select {
+    max-width: 400px;
+  }
 }
 
 @media (min-width: 800px) {
