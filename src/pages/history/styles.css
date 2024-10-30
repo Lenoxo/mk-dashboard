@@ -23,7 +23,7 @@
   list-style: none;
   border: 2px solid white;
   border-radius: 2rem;
-  width: 70vw;
+  width: 90vw;
   padding: 1.5rem;
 }
 
@@ -70,4 +70,25 @@
   width: 3rem;
   height: 3rem;
   color: white;
+}
+
+@media (min-width: 500px) {
+  .fightItem {
+    width: 450px;
+  }
+}
+
+@media (min-width: 800px) {
+  .fightList {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fightItem {
+    width: 350px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .fightList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
