@@ -1,5 +1,6 @@
 .rivalQuickInfo {
   width: 85vw;
+  max-width: 430px;
   height: 14vh;
   display: grid;
   place-items: center;
@@ -28,7 +29,7 @@
 .rivalQuickInfo__edit {
   display: grid;
   place-items: center;
-  width: 1.5rem;
+  width: 3.5rem;
   color: white;
   padding: 8px;
   border: 2px solid white;

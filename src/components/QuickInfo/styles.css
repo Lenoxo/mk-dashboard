@@ -1,9 +1,13 @@
+.profileHeader {
+  background-color: #2f2f2f;
+}
+
 .quickInfo {
+  width: auto;
+  height: 18vh;
   display: grid;
   place-items: center;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #2f2f2f;
-  height: 18vh;
 }
 
 .quickInfo__image {
@@ -24,9 +28,19 @@
 .quickInfo__edit {
   display: grid;
   place-items: center;
-  width: 1.5rem;
+  width: 3.5rem;
   color: white;
   padding: 8px;
   border: 2px solid white;
   border-radius: 1rem;
+}
+
+@media (min-width: 800px) {
+  .profileHeader {
+    display: grid;
+    place-items: center;
+  }
+  .quickInfo {
+    width: 520px;
+  }
 }
