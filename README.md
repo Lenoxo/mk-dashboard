@@ -16,6 +16,8 @@
 
 Explore the functionality and design of **Mk-dashboard** in this demo video:
 
+https://github.com/user-attachments/assets/283fef85-5838-44fe-a488-6ac2975a840e
+
 ### Features
 
 - **Daily Fight Log:** Add new fight records and view a daily fight counter on the main page.
