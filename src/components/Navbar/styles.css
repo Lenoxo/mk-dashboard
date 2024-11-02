@@ -59,3 +59,23 @@
   height: 100%;
   width: auto;
 }
+
+@media (min-width: 900px) {
+  .navbar--show {
+    transform: translate(-30vw);
+  }
+  .navbar {
+    width: 30vw;
+    right: -30vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar--show {
+    transform: translate(-23vw);
+  }
+  .navbar {
+    width: 23vw;
+    right: -23vw;
+  }
+}

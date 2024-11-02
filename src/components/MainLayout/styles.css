@@ -46,3 +46,15 @@
   height: 100%;
   width: 100%;
 }
+
+@media (min-width: 900px) {
+  .appWrapper--move {
+    transform: translate(-30vw);
+  }
+}
+
+@media (min-width: 1200px) {
+  .appWrapper--move {
+    transform: translate(-23vw);
+  }
+}
