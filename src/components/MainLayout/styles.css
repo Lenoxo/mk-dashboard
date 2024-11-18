@@ -24,6 +24,28 @@
   border-bottom: 2px solid #2a2c2f;
 }
 
+.header__list {
+  display: none;
+  width: 23%;
+  /* height: 15vh; */
+  justify-content: space-between;
+  list-style: none;
+}
+
+.header__link__icon {
+  width: auto;
+  height: 1.3rem;
+  padding-right: 4px;
+}
+
+.header__list__link {
+  display: none;
+  align-items: center;
+  text-decoration: none;
+  color: #d7eae3;
+  background-color: inherit;
+}
+
 .header__button {
   width: 4rem;
   height: 85%;
@@ -56,5 +78,17 @@
 @media (min-width: 1200px) {
   .appWrapper--move {
     transform: translate(-23vw);
+  }
+
+  .header__list {
+    display: flex;
+  }
+
+  .header__list__link {
+    display: flex
+  }
+
+  .header__button {
+    display: none;
   }
 }
