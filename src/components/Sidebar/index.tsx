@@ -6,7 +6,7 @@ interface Props {
   open: boolean;
 }
 
-export function Navbar({ setOpen, open }: Props) {
+export function Sidebar({ setOpen, open }: Props) {
   return (
     <nav className={`navbar ${open && "navbar--show"}`}>
       <NavLink className="navbar__link" to="/">
