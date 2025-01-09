@@ -11,6 +11,12 @@
   font-size: 1.2rem;
 }
 
+.form--fullWidth {
+  width: 100vw;
+  border: none;
+}
+
+
 .form__label {
   font-weight: bold;
 }

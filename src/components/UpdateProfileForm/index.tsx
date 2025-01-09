@@ -62,7 +62,7 @@ export function UpdateProfileForm() {
     navigate("/profile");
   }
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form form--fullWidth" onSubmit={handleSubmit}>
       <label className="form__label" htmlFor="nicknameInput">
         Write your nickname
       </label>
