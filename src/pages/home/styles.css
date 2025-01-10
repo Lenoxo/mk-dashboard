@@ -27,6 +27,13 @@ body {
   .currentRival__select {
     max-width: 400px;
   }
+
+  /* For styling the form component when is the direct child of the appWrapper component */
+  .appWrapper>.form {
+    max-width: 100vw;
+    width: 100vw;
+    border: none;
+  }
 }
 
 @media (min-width: 800px) {
