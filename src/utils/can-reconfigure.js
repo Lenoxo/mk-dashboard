@@ -8,5 +8,18 @@ export function canReconfigure(from, to) {
 
   if (!isSameAmountOfUniqueLetters) return false;
 
+  const transformations = {};
+
+  for (let i = 0; i < from.length; i++) {
+    const fromLetter = from[i];
+    const toLetter = to[i];
+
+    const storedToLetter = transformations[fromLetter];
+
+    if (storedToLetter && storedToLetter !== to[i]) return false;
+
+    transformations[fromLetter] = toLetter;
+  }
+
   return true;
 }
