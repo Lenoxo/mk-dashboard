@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { evaluate } from "mathjs";
 
 const rows = [[7, 8, 9], [4, 5, 6], [1, 2, 3], [0]];
 const operations = ["+", "-", "*", "/"];
 const Calculator = () => {
   const [value, setValue] = useState("");
 
-  const handleButtonPress = (newValue) => setValue(value.concat(newValue));
-  const handleEqualSignPress = (op) => {
-    const result = eval(op);
+  const handleButtonPress = (newValue: string) => setValue(value.concat(newValue));
+  const handleEqualSignPress = (expression: string) => {
+    const result = evaluate(expression).toString();
     setValue(result);
   };
 
@@ -21,7 +22,7 @@ const Calculator = () => {
             <div key={index} role="row">
               {row.map((num) => {
                 return (
-                  <button onClick={() => handleButtonPress(num)} key={num}>
+                  <button onClick={() => handleButtonPress(num.toString())} key={num}>
                     {num}
                   </button>
                 );

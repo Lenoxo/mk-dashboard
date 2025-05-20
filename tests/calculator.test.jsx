@@ -80,19 +80,29 @@ describe("Calculator", () => {
   test("should show the result of the operation when pressing the equal sign", () => {
     render(<Calculator />);
 
-    const button4 = screen.getByText("3");
-    fireEvent.click(button4);
+    const button3 = screen.getByText("3");
+    fireEvent.click(button3);
 
     const addition = screen.getByText("+");
     fireEvent.click(addition);
 
-    const button2 = screen.getByText("7");
-    fireEvent.click(button2);
+    const button7 = screen.getByText("7");
+    fireEvent.click(button7);
 
     const equal = screen.getByText("=");
     fireEvent.click(equal);
 
     const input = screen.getByRole("textbox");
     expect(input.value).toBe("10");
+
+    const rest = screen.getByText("-");
+    fireEvent.click(rest);
+
+    const button4 = screen.getByText("4");
+    fireEvent.click(button4);
+
+    fireEvent.click(equal);
+
+    expect(input.value).toBe("6");
   });
 });

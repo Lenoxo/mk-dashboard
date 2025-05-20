@@ -10,6 +10,7 @@ import { AppContext } from "../../context";
 import { NoRivalsGuide } from "../../components/NoRivalsGuide";
 import { currentDate } from "../../utils";
 import { SelectCurrentRival } from "../../components/SelectCurrentRival";
+import { Calculator } from "../../components/Calculator";
 
 export function Home() {
   const context = useContext(AppContext);
@@ -92,6 +93,7 @@ export function Home() {
 
   return (
     <>
+      <Calculator />
       {renderHeader()}
       <section className="currentRivalFights">
         {currentRivalFights
