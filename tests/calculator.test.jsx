@@ -1,47 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { useState } from "react";
 import { afterEach, describe, expect, test } from "vitest";
-
-const rows = [[7, 8, 9], [4, 5, 6], [1, 2, 3], [0]];
-
-const operations = ["+", "-", "*", "/"];
-
-const Calculator = () => {
-  const [value, setValue] = useState("");
-
-  const handleButtonPress = (newValue) => setValue(value.concat(newValue));
-
-  return (
-    <section>
-      <h1>Calculator</h1>
-      <input value={value} readOnly />
-      <div role="grid">
-        {rows.map((row, index) => {
-          return (
-            <div key={index} role="row">
-              {row.map((num) => {
-                return (
-                  <button onClick={() => handleButtonPress(num)} key={num}>
-                    {num}
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-      <div role="column">
-        {operations.map((op) => {
-          return (
-            <button onClick={() => handleButtonPress(op)} key={op}>
-              {op}
-            </button>
-          );
-        })}
-      </div>
-    </section>
-  );
-};
+import { Calculator } from "../src/components/Calculator/index";
 
 describe("Calculator", () => {
   afterEach(cleanup);
@@ -116,5 +75,24 @@ describe("Calculator", () => {
 
     const input = screen.getByRole("textbox");
     expect(input.value).toBe("4+2");
+  });
+
+  test("should show the result of the operation when pressing the equal sign", () => {
+    render(<Calculator />);
+
+    const button4 = screen.getByText("3");
+    fireEvent.click(button4);
+
+    const addition = screen.getByText("+");
+    fireEvent.click(addition);
+
+    const button2 = screen.getByText("7");
+    fireEvent.click(button2);
+
+    const equal = screen.getByText("=");
+    fireEvent.click(equal);
+
+    const input = screen.getByRole("textbox");
+    expect(input.value).toBe("10");
   });
 });
