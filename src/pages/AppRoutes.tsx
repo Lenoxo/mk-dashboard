@@ -4,6 +4,7 @@ import { ProfilePage } from "./profile";
 import { UpdateProfileForm } from "../components/UpdateProfileForm";
 import { RivalForm } from "../components/RivalForm";
 import { HistoryPage } from "./history";
+import { Calculator } from "../components/Calculator";
 
 export function AppRoutes() {
   const routes = useRoutes([
@@ -28,6 +29,10 @@ export function AppRoutes() {
     {
       path: "/history",
       element: <HistoryPage />
+    },
+    {
+      path: "/tests",
+      element: <Calculator />
     }
   ]);
   return routes;
